@@ -1,6 +1,6 @@
-# 1 Семинар 08.11.2021 ASM 1
+# 1 Семинар 02.2024 ASM 1
 
-[Прошлогодний семнар](https://github.com/blackav/hse-caos-2020/blob/master/07-asm1/README.md)
+
 
 ## Компиляция и запуск:
 
