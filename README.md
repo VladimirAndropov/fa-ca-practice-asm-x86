@@ -12,19 +12,8 @@
 6. [конспект][c] - системные вызовы
 7. [[конспект](07sem-c/README.md)][c] - динамическая память.
 8. [[конспект](08sem-c/README.md)][c] - IEEE754. float. inline asm.
-9. [[конспект](09sem-os)][OS] - Yabloko. Анимируем елку.
-10. [[конспект](10sem-os)][OS] - Yabloko. Добавляем поддержку shift в драйвер клавиатуры. Пишет свой sleep, используя Programmable Interval Timer.
-11. [конспект][OS] - Yabloko. Добавляем свои системные вызовы. Разбираемся, как запускать пользовательские программы.
-12. [[конспект](12sem-fs)][FS] - Работа с файлами и правами.
-13. [[конспект](13sem-fs)][FS] - Mmap. + немного OOM.
-14. [[конспект](14sem-fs)][FS] - Fork.
-15. [[конспект](15sem-fs)][FS] - Exec. Pipe.
-16. [[конспект](16sem-fs)][FS] - Сигналы. Sigaction.
-17. [[конспект](17sem-fs)][FS] - время, mktime, gettimeofday, 2038 год, localtime
-18. [fs]   - epoll, select, timer
-19. [конспект][Cloud] - аренда сервера, запуск приложения, nginx, systemd
-20. [конспект][FS] - pthreads
-21. [конспект][FS] - mutex
+
+
 22. [[конспект](22sem-fs/README.md)][C++] - std::thread, std::async, std::future, std::promise, std::lock_guard
  
 
