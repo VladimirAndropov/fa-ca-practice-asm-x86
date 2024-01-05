@@ -329,7 +329,7 @@ movw 0xfff0, %ax    // ax == -16
 sarw $4, %ax        // ax == 0xffff == -1
 salw $5, %ax        // ax == 0xfff0 == -16
 ```
-См. также справочник.
+См. также [справочник.](https://www.felixcloutier.com/x86/movw)
 
 
 ## Самостоятельная работа
