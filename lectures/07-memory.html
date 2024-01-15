@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/07-memory.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:38 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Обращение к памяти - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="07-memory.html" class="active"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="Обращения-к-памяти"><a class="header" href="#Обращения-к-памяти">Обращения к памяти</a></h2>
+<p>Сохранить значение регистра eax по адресу 0x40100,
+а потом загрузить обратно в регистр ebx:</p>
+<pre><code class="language-x86asm">    mov %eax, 0x40100
+    mov 0x40100, %ebx
+</code></pre>
+<p>(При этом мы используем 4 байта по адресам
+0x40100, 0x40101, 0x40102, 0x40103.)</p>
+<p>Положить в память по адресу 0x40100 целое число
+0x1543:</p>
+<pre><code class="language-x86asm">    movl $0x1543, 0x40100
+</code></pre>
+<p>Как правило, мы используем в качестве адресов метки:</p>
+<pre><code class="language-x86asm">    .global main
+main:
+    mov x, %eax
+    call writei32
+    call finish
+
+x:  .int 43
+</code></pre>
+<p>Не любой адрес в памяти доступен для чтения и тем более записи:</p>
+<pre><code class="language-x86asm">    .global main
+main:
+    incl x
+    call finish
+
+x:  .int 43
+</code></pre>
+<p>При попытке исполнения инструкции <code>incl</code> операционная система
+остановит программу с сообщением «Segmentation fault»,
+поскольку эти данные нельзя менять.</p>
+<h2 id="Секции-data-и-bss"><a class="header" href="#Секции-data-и-bss">Секции .data и .bss</a></h2>
+<p>Любые байты, порождаемые ассемблером,
+записываются в одну из <em>секций</em> исполняемого
+файла. По умолчанию это секция <code>.text</code>, в которой
+ожидается машинный код и которая недоступна для записи.</p>
+<p>Данные можно положить в секцию <code>.data</code>:</p>
+<pre><code class="language-x86asm">    incl x
+
+    .data
+x:  .int 43
+
+    .text
+    call finish
+</code></pre>
+<p>Обратите внимание, что ассемблер собирает вместе содержимое каждой
+из секций: в примере выше инструкция <code>call</code> окажется в памяти
+(и в исполняемом файле)
+сразу после <code>incl</code>.</p>
+<p>Есть также секция .bss, в которую можно положить только нулевые байты:</p>
+<pre><code class="language-x86asm">    .bss
+z:  .int 0
+    .int 0
+    // .int 83  // would be an error
+</code></pre>
+<p>Typical memory layout:</p>
+<pre><code>           ┌──────────────────┐    Executable file
+0x0000_0000│//////////////////│   ┌───────────────┐
+           │//////////////////│   │ headers       │
+           ├──────────────────┤   ├───────────────┤
+           │.text   (read and │   │.text          │
+           │         execute) │   │               │
+      eip─►│                  │   │               │
+           │                  │   │               │
+           │                  │   │               │
+           ├──────────────────┤   ├───────────────┤
+           │.data   (read and │   │.data          │
+           │         write)   │   │               │
+           ├──────────────────┤   └───────────────┘
+           │.bss    (read and │
+           │         write)   │
+           │                  │
+           ├──────────────────┤
+           │//////////////////│
+           │//////////////////│    /// = unmapped region
+           │//////////////////│          (inaccessible memory)
+           │//////////////////│
+           │//////////////////│
+           │//////////////////│
+      esp─►│stack             │
+           │                  │
+           │                  │
+           │                  │
+           │                  │
+           ├──────────────────┤
+           │//////////////////│
+0xffff_ffff│//////////////////│
+           └──────────────────┘
+</code></pre>
+<p>Бывают read-only данные (например, тексты сообщений программы),
+для них есть секция <code>.rodata</code>. Эта секция не имеет собственной
+директивы, поэтому нужно воспользоваться директивой <code>.section</code>:</p>
+<pre><code class="language-x86asm">    .section .rodata
+pi_digits:
+    .byte 3,1,4,1,5,9,2,6
+</code></pre>
+<p>(На практике вместо <code>.rodata</code> константные данные часто кладут в <code>.text</code>.)</p>
+<h2 id="endianness"><a class="header" href="#endianness">Endianness</a></h2>
+<p>x86 — little endian:</p>
+<pre><code class="language-x86asm">    // 0x40100:  00 00 00 00  00 00 00 00
+    movl $0xabcdef, 0x40100
+    // 0x40100:  ef cd ab 00  00 00 00 00
+</code></pre>
+<p>Младший байт по младшему адресу в памяти.</p>
+<h2 id="Расширение"><a class="header" href="#Расширение">Расширение</a></h2>
+<pre><code class="language-x86asm">    movzbl %al, %edi  // zero-extend, расширение нулями
+    movsbl %al, %edi  // sign-extend, расширение знаковым битом
+    cdq  // sign-extend eax to edx:eax
+</code></pre>
+<p>В синтаксисе Intel —
+<a href="https://www.felixcloutier.com/x86/movzx">movzx</a>,
+<a href="https://www.felixcloutier.com/x86/movsx">movsx</a>.</p>
+<h2 id="Разные-способы-адресации-в-x86"><a class="header" href="#Разные-способы-адресации-в-x86">Разные способы адресации в x86</a></h2>
+<pre><code class="language-x86asm">    mov x + 4, %eax   // прямая адресация
+    mov $x, %esi      // (положили в esi адрес массива x)
+    mov 4(%esi), %eax // косвенная адресация
+
+    mov $17, %edi
+
+    // загружаем в eax 18-й элемент массива
+    // (адрес которого %esi + %edi*4)
+    mov (%esi, %edi, 4), %eax
+
+    // делаем то же самое
+    mov x(, %edi, 4), %eax
+
+    // и ещё раз
+    mov x + 17 * 4, %eax
+
+    .bss
+x:  .skip 4 * 100
+
+x5: .int x + 4*5      // в x5 лежит адрес шестого элемента массива x
+</code></pre>
+<p>Общий вид обращения к памяти:</p>
+<p><code>OFFSET(BREG, IREG, SCALE)</code></p>
+<p>Здесь OFFSET — непосредственно заданное смещение,
+BREG — базовый регистр, IREG — индексный регистр,
+умножаемый на SCALE (SCALE может быть 1, 2, 4 или 8).</p>
+<p>Итоговый адрес (effective address) вычисляется по формуле:</p>
+<p><code>BREG + OFFSET + IREG * SCALE</code></p>
+<h2 id="Стек"><a class="header" href="#Стек">Стек</a></h2>
+<p>Writable область памяти, которая используется
+как стек :-). Стек на x86 растёт <em>вниз</em> (от старших адресов к младшим).
+На верхушку стека (первый занятый байт) указывает регистр esp.</p>
+<p>Скопировать верхушку стека (первые 4 байта) в регистр <code>eax</code>:</p>
+<pre><code class="language-x86asm">    mov (%esp), %eax
+</code></pre>
+<p>Для того, чтобы класть данные на стек и выталкивать их оттуда,
+есть специальные инструкции:</p>
+<pre><code class="language-x86asm">    push %eax  // то же, что sub $4, %esp; mov %eax, (%esp)
+    pop %eax   // то же, что mov (%esp), %eax; add $4, %esp
+</code></pre>
+<p>Инструкция <code>push</code> одна из немногих, которые могут обратиться
+к двум адресам памяти сразу:</p>
+<pre><code class="language-x86asm">    .data
+x:  .int 1900
+
+    .text
+    pushl x  // взять 4 байта из памяти по адресу x
+             // и положить их в стек, то есть тоже в память
+</code></pre>
+<p>Можно пользоваться памятью выше <code>esp</code>, если вы знаете,
+что там что-то есть. Например, если вы положили в стек
+два 32-битных числа, их можно оттуда читать и там изменять:</p>
+<pre><code class="language-x86asm">    pushl $6
+    pushl $7
+
+    // теперь стек выглядит так:
+    //    07 00 00 00  06 00 00 00 ...
+    //    ↑ esp
+
+    mov 4(%esp), %eax  // загрузили в %eax число 6
+    incl (%esp)        // теперь на верхушке стека лежит число 8
+</code></pre>
+<p>Память <em>ниже</em> <code>esp</code> использовать не следует.</p>
+<p>Инструкция <code>push %esp</code> кладёт на стек
+то значение <code>esp</code>, которое было до её исполнения
+(не уменьшенное на 4).</p>
+<h2 id="Подпрограммы"><a class="header" href="#Подпрограммы">Подпрограммы</a></h2>
+<p>Когда в ДЗ просят сдать «функцию» или «подпрограмму»:</p>
+<ol>
+<li>исполнение начинается с метки с именем подпрограммы;</li>
+<li>метка должна быть <code>.global</code>;</li>
+<li>чтобы вернуть управление в проверяющую программу,
+используйте инструкцию <code>ret</code>;</li>
+<li>если меняете значения регистров, кроме <code>eax</code>, <code>ecx</code> и <code>edx</code>,
+сохраняйте их в стек и потом восстанавливайте.</li>
+</ol>
+<p>Например, если вас просят написать функцию <code>foobar</code>,
+и вам нужно менять регистры <code>esi</code> и <code>edi</code>:</p>
+<pre><code class="language-x86asm">    .global foobar
+foobar:
+    push %esi
+    push %edi
+    ... // делаем что просят, можем портить esi и edi
+    pop %edi // восстанавливаем в обратном порядке
+    pop %esi
+    ret
+</code></pre>
+<p>(Подробнее в следующей лекции.)</p>
+<h2 id="Устройство-ОЗУ"><a class="header" href="#Устройство-ОЗУ">Устройство ОЗУ</a></h2>
+<p>Мы уже видели SRAM — память на триггерах.</p>
+<p>Основную часть памяти компьютера составляет DRAM:
+<img src="dram.png" alt="" /></p>
+<p>Процессор и память общаются посредством <em>шины</em> (bus):
+<img src="system_bus.png" alt="" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="06-nand2cpu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="08-call-ret/08-call-ret.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="06-nand2cpu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="08-call-ret/08-call-ret.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/07-memory.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:39 GMT -->
+</html>

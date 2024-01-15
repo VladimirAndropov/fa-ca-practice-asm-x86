@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/22-sockets/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:04 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Сети и сокеты - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="Сети-и-сокеты"><a class="header" href="#Сети-и-сокеты">Сети и сокеты</a></h2>
+<p>Для обмена информацией в компьютерных сетях придуманы стандартные <em>протоколы</em>
+(договорённости о том, кто когда что кому отправляет и что это значит).</p>
+<h3 id="isoosi"><a class="header" href="#isoosi">ISO/OSI</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/OSI_model">Википедия</a></p>
+<p>Protocol data unit (PDU)</p>
+<ul>
+<li>Physical</li>
+<li>Data Link</li>
+<li>Network</li>
+<li>Transport</li>
+<li>Session</li>
+<li>Presentation</li>
+<li>Application</li>
+</ul>
+<h3 id="tcpip"><a class="header" href="#tcpip">TCP/IP</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Internet_protocol_suite">Стек протоколов Интернета</a>,
+или стек TCP/IP, выглядит примерно так:</p>
+<div class="table-wrapper"><table><thead><tr><th>Уровень</th><th>Протоколы этого уровня</th></tr></thead><tbody>
+<tr><td>Прикладной (application)</td><td>HTTP, SSH, DNS, ...</td></tr>
+<tr><td>Транспортный (transport)</td><td>TCP, UDP, SCTP, QUIC, ...</td></tr>
+<tr><td>Межсетевой (inter-net)</td><td>IPv4, IPv6</td></tr>
+<tr><td>Канальный (link)</td><td>Ethernet, Wi-Fi (IEEE 802.11), ...</td></tr>
+</tbody></table>
+</div>
+<p>Обычно мы используем набор протоколов разных уровней, чтобы решить свою прикладную задачу. Например, при загрузке веб-страницы <a href="http://wiki.cs.hse.ru/">http://wiki.cs.hse.ru/</a> будут как минимум использоваться HTTP, TCP, IPv4 и какие-то канальные протоколы.</p>
+<p>Фрагмент данных с верхнего уровня стека заворачивается в “конверт” нижнего уровня (картинка из википедии на примере UDP):</p>
+<p><img src="sockets/Untitled.png" alt="Untitled" /></p>
+<p>Данные доходят до адресата через цепочку промежуточных устройств, каждое из которых распаковывает и просматривает столько конвертов, сколько ему нужно и сколько оно умеет:</p>
+<p><img src="sockets/Untitled%201.png" alt="Untitled" /></p>
+<p>Например, пока пакет не дошёл до <em>хоста</em> (компьютера) – адресата, никто* не смотрит на заголовки транспортного уровня. Благодаря этому поверх имеющейся инфраструктуры межсетевого уровня можно реализовывать новые способы обмена информацией.</p>
+<p>Как правило, протоколы прикладного уровня реализованы в userspace (в программах и библиотеках), транспортного и межсетевого — в ядре ОС, а канальный уровень делят между собой ОС и аппаратура.</p>
+<p>На межсетевом уровне появляется глобальная адресация: у каждого хоста в сети есть уникальный идентификатор — <em>адрес</em>. Адрес IPv4 — 4 байта, их записывают в десятичной системе: <code>92.242.58.220</code>. Адрес IPv6 — 16 байт, их записывают в 16-ричной системе двухбайтовыми последовательностями через двоеточие: <code>2a02:6b8::2:242</code> (там, где два двоеточия подряд, подразумевается последовательность нулевых байт).</p>
+<p>Протокол TCP представляет абстракцию “трубы с данными”, похожей на канал в Unix: гарантируется надёжная доставка данных в изначальной последовательности, не сохраняются границы между отдельными записями в канал. Протокол UDP представляет абстракцию “голубиной почты”: можно отправлять <em>датаграммы</em> — отдельные фрагменты данных известного размера, которые могут дойти до получателя в произвольном порядке, дойти несколько раз или не дойти вовсе.</p>
+<p>TCP и UDP используют адрес межсетевого уровня и добавляют ещё 16 бит, которые называются «<em>порт</em>». Есть well-known порты, которые обычно используются для разных надобностей (см. <code>/etc/services</code>): например, сервер HTTP обычно использует порт 80.</p>
+<h3 id="Ну-и-теперь-собственно-сокеты"><a class="header" href="#Ну-и-теперь-собственно-сокеты">Ну и теперь собственно сокеты</a></h3>
+<p>POSIX даёт нам слой абстракции поверх протоколов транспортного уровня и ниже. Абстракция называется <a href="https://en.wikipedia.org/wiki/Berkeley_sockets">sockets</a> (гнёзда). В userspace сокет виден как файловый дескриптор.</p>
+<p>Создаём сокет (<a href="https://man7.org/linux/man-pages/man2/socket.2.html">man 2 socket</a>):</p>
+<pre><code class="language-c">#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int socket(int domain, int type, int protocol);
+</code></pre>
+<p>Параметр domain выбирает используемый протокол межсетевого уровня (ну примерно). Нам будут интересны три варианта:</p>
+<pre><code>Name         Purpose                                    Man page
+AF_INET      IPv4 Internet protocols                    ip(7)
+AF_INET6     IPv6 Internet protocols                    ipv6(7)
+AF_UNIX      Local communication                        unix(7)
+</code></pre>
+<p>Сокеты бывают как минимум двух типов (параметр type): потоковые и датаграммные (ср. TCP и UDP). Для первых хорошо подходят стандартные операции read/write, для вторых не очень.</p>
+<pre><code>       SOCK_STREAM     Provides sequenced, reliable, two-way, connection-based
+                       byte  streams.
+
+       SOCK_DGRAM      Supports datagrams (connectionless, unreliable messages
+                       of a fixed maximum length).
+</code></pre>
+<p>protocol мы будем обычно указывать равным нулю, чтобы ОС выбрала за нас стандартный протокол нужного типа (TCP для AF_INET/SOCK_STREAM, UDP для AF_INET/SOCK_DGRAM), но можно и явно указать IPPROTO_TCP или IPPROTO_UDP.</p>
+<h3 id="Где-бы-взять-адрес"><a class="header" href="#Где-бы-взять-адрес">Где бы взять адрес</a></h3>
+<p>Допустим, мы хотим соединиться с хостом <a href="http://ya.ru/">ya.ru</a> по протоколу HTTPS. Мы пока не знаем, есть ли у хоста адрес IPv6 или IPv4 и каковы эти адреса. Нам нужно обратиться к серверу DNS (Domain Name System) и спросить у него. Ещё неплохо бы посмотреть в /etc/services, какого типа сокет нам понадобится (stream или datagram) и какой использовать порт.</p>
+<p>Для этого нам дана функция getaddrinfo:</p>
+<pre><code class="language-c">       int getaddrinfo(const char *node, const char *service,
+                       const struct addrinfo *hints,
+                       struct addrinfo **res);
+
+       void freeaddrinfo(struct addrinfo *res);
+
+       const char *gai_strerror(int errcode);
+
+       struct addrinfo {
+               int              ai_flags;
+               int              ai_family;
+               int              ai_socktype;
+               int              ai_protocol;
+               socklen_t        ai_addrlen;
+               struct sockaddr *ai_addr;
+               char            *ai_canonname;
+               struct addrinfo *ai_next;
+       };
+</code></pre>
+<p>Попробуем распечатать адреса, которые она нам возвращает. Смотреть на это без боли невозможно:</p>
+<pre><code class="language-c">#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, &quot;Usage: %s NODE SERVICE\n&quot;, argv[0]);
+        return 1;
+    }   
+    struct addrinfo *res = NULL;
+    int gai_err;
+    if (gai_err = getaddrinfo(argv[1], argv[2], NULL, &amp;res)) {
+        fprintf(stderr, &quot;gai error: %s\n&quot;, gai_strerror(gai_err));
+        return 2;
+    }   
+    for (struct addrinfo *ai = res; ai; ai = ai-&gt;ai_next) {
+        char buf[1024];
+        printf(&quot;ai_flags=%d, ai_family=%d, ai_socktype=%d\n&quot;,
+                ai-&gt;ai_flags, ai-&gt;ai_family, ai-&gt;ai_socktype);
+        struct sockaddr_in *inet;
+        struct sockaddr_in6 *inet6;
+        switch (ai-&gt;ai_family) {
+            case AF_INET:
+                inet = (struct sockaddr_in *)ai-&gt;ai_addr;
+                printf(&quot;\taddress: %s, port: %hu\n&quot;,
+                    inet_ntop(ai-&gt;ai_family, &amp;inet-&gt;sin_addr,
+                        buf, sizeof(buf)),
+                    htons(inet-&gt;sin_port));
+                break;
+            case AF_INET6:
+                inet6 = (struct sockaddr_in6 *)ai-&gt;ai_addr;
+                printf(&quot;\taddress: %s, port: %hu\n&quot;,
+                    inet_ntop(ai-&gt;ai_family, &amp;inet6-&gt;sin6_addr,
+                        buf, sizeof(buf)),
+                    htons(inet6-&gt;sin6_port));
+                break;
+            default:
+                printf(&quot;\tunknown address family\n&quot;);
+        }
+    }   
+    freeaddrinfo(res);
+}
+</code></pre>
+<p>Так или иначе, теперь у нас есть адреса, <del>по которым найдём сервиса́</del> и можно создавать сокеты подходящих типов и пробовать устанавливать соединения.</p>
+<h3 id="Потоковые-сокеты"><a class="header" href="#Потоковые-сокеты">Потоковые сокеты</a></h3>
+<p>Есть две стороны: клиент и сервер.</p>
+<p>Клиент:</p>
+<pre><code class="language-c">#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int create_connection(char* node, char* service) {
+    struct addrinfo *res = NULL;
+    int gai_err;
+    struct addrinfo hint = {
+        .ai_family = AF_UNSPEC,     // можно и AF_INET, и AF_INET6
+        .ai_socktype = SOCK_STREAM, // но мы хотим поток (соединение)
+    };
+    if (gai_err = getaddrinfo(node, service, &amp;hint, &amp;res)) {
+        fprintf(stderr, &quot;gai error: %s\n&quot;, gai_strerror(gai_err));
+        return -1;
+    }
+    int sock = -1;
+    for (struct addrinfo *ai = res; ai; ai = ai-&gt;ai_next) {
+        sock = socket(ai-&gt;ai_family, ai-&gt;ai_socktype, 0);
+        if (sock &lt; 0) {
+            perror(&quot;socket&quot;);
+            continue;
+        }
+        if (connect(sock, ai-&gt;ai_addr, ai-&gt;ai_addrlen) &lt; 0) {
+            perror(&quot;connect&quot;);
+            close(sock);
+            sock = -1;
+            continue;
+        }
+        break;
+    }
+    freeaddrinfo(res);
+    return sock;
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        fprintf(stderr, &quot;Usage: %s NODE SERVICE\n&quot;, argv[0]);
+        return 1;
+    }
+    int sock = create_connection(argv[1], argv[2]);
+    if (sock &lt; 0) {
+        return 1;
+    }
+    char* msg = &quot;hello world\n&quot;;
+    write(sock, msg, strlen(msg));
+    close(sock);
+}
+</code></pre>
+<p>Сервер:</p>
+<pre><code class="language-c">#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int create_listener(char* service) {
+    struct addrinfo *res = NULL;
+    int gai_err;
+    struct addrinfo hint = {
+        .ai_family = AF_UNSPEC,
+        .ai_socktype = SOCK_STREAM,
+        .ai_flags = AI_PASSIVE,
+    };
+    if (gai_err = getaddrinfo(NULL, service, &amp;hint, &amp;res)) {
+        fprintf(stderr, &quot;gai error: %s\n&quot;, gai_strerror(gai_err));
+        return -1;
+    }
+    int sock = -1;
+    for (struct addrinfo *ai = res; ai; ai = ai-&gt;ai_next) {
+        sock = socket(ai-&gt;ai_family, ai-&gt;ai_socktype, 0);
+        if (sock &lt; 0) {
+            perror(&quot;socket&quot;);
+            continue;
+        }
+        if (bind(sock, ai-&gt;ai_addr, ai-&gt;ai_addrlen) &lt; 0) {
+            perror(&quot;bind&quot;);
+            close(sock);
+            sock = -1;
+            continue;
+        }
+        if (listen(sock, SOMAXCONN) &lt; 0) {
+            perror(&quot;listen&quot;);
+            close(sock);
+            sock = -1;
+            continue;
+        }
+        break;
+    }
+    freeaddrinfo(res);
+    return sock;
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, &quot;Usage: %s SERVICE\n&quot;, argv[0]);
+        return 1;
+    }
+    int sock = create_listener(argv[1]);
+    if (sock &lt; 0) {
+        return 1;
+    }
+    int connection = accept(sock, NULL, NULL);
+    char* msg = &quot;hello world\n&quot;;
+    write(connection, msg, strlen(msg));
+    close(sock);
+}
+</code></pre>
+<h3 id="Датаграммные-сокеты"><a class="header" href="#Датаграммные-сокеты">Датаграммные сокеты</a></h3>
+<pre><code class="language-c">       ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
+                      const struct sockaddr *dest_addr, socklen_t addrlen);
+
+       ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,
+                        struct sockaddr *src_addr, socklen_t *addrlen);
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../18-x86-floating-point/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../19-process/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../18-x86-floating-point/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../19-process/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/22-sockets/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:05 GMT -->
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/18-floating-point-arithmetic/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:00 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Вещественные числа - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Вещественные-числа"><a class="header" href="#Вещественные-числа">Вещественные числа</a></h1>
+<h2 id="Формат-представления-числа"><a class="header" href="#Формат-представления-числа">Формат представления числа</a></h2>
+<p>Для хранения и обработки вещественных чисел большинство процессоров используют формат <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>. Есть удобный <a href="https://www.h-schmidt.net/FloatConverter/IEEE754.html">калькулятор</a>.
+Рассмотрим, как устроен формат, на примере 32-битных вещественных чисел: <img src="float_example.png" alt="Float example" /></p>
+<p>Биты числа разделены на 3 группы:</p>
+<ol>
+<li><strong>Знаковый бит</strong>. Один, старший бит. 0 -- число положительное, 1 -- отрицательное.</li>
+<li><strong>Показатель степени</strong>. 8-битное целое число, занимает биты с 23-го по 30-ый. Означает <em>степень двойки</em>, на которую будет домножаться основаная часть числа, записанная далее.</li>
+<li><strong>Дробная часть</strong>. 23-битное целое число, содержащее <em>значащие биты</em> вещественного числа.</li>
+</ol>
+<p>Обозначим знаковый бит как <code>sign</code>, беззнаковое значение показателя степени как <code>exp</code>,
+а беззнаковое значение дробной части как <code>frac</code>.</p>
+<h2 id="Значение-числа-в-разных-случаях"><a class="header" href="#Значение-числа-в-разных-случаях">Значение числа в разных случаях</a></h2>
+<p>Итак, как числа получаются с помощью этих компонент? Есть несколько случаев:</p>
+<ul>
+<li>Если 1 &lt;= <code>exp</code> &lt;= 254, число называется <strong>нормализованным</strong>. В таком случае
+оно равно \( -1^{sign} × 2^{exp-127} × 1,frac \).
+То есть знак и степень двойки домножаются на число, у которого в целой части
+стоит 1, а дробную часть состаляют 23 бита дробной части :-).</li>
+</ul>
+<p>Т.к. мы хотим представлять как большие по модулю числа, так и близкие к нулю, то
+степень двойки должна принимать как положительные, так и отрицательные значения.
+Поэтому мы вычитаем из неё 127 (смещение), так степень станет принимать значения
+[-126; 127] (почему не могут быть -127 и 128, увидим ниже).</p>
+<p><img src="normalized_example.png" alt="Пример нормализованного числа" /></p>
+<ul>
+<li>Если exp=0, число называется <strong>денормализованным</strong>. В этом случае оно равно
+\( -1^{sign} × 2^{-126} × 0,frac \).</li>
+</ul>
+<p><img src="denormalized_example.png" alt="Пример денормализованного числа" /></p>
+<p>Нормализованные и денормализованные числа отличаются тем, что в первых перед
+мантиссой ставится целая часть 1, а во вторых -- 0. Это сделано для того, чтобы
+уметь представлять <em>ноль</em>. Если бы перед мантиссой всегда ставилась 1, то <em>ноль</em>
+бы не получался.</p>
+<ul>
+<li>Если <code>exp</code>=255 и <code>frac</code>=0, число называется <strong>бесконечностью</strong> и обозначается <code>+inf</code> или <code>-inf</code> в зависимости от знака.</li>
+</ul>
+<p><img src="-inf_example.png" alt="Пример бесконечности" /></p>
+<p>Бесконечности нужны для обозначения очень больших по модулю чисел, для представления которых не достаточно 8-ми бит показателя степени.</p>
+<ul>
+<li>Если <code>exp</code>=255 и <code>frac</code>!=0, число называется <strong>нечислом</strong> и обозначается &quot;NaN&quot;.  Знак при этом ни на что не влияет.</li>
+</ul>
+<p><img src="nan_example.png" alt="Пример нечисла" /></p>
+<p>Как видно, различных NaN-ов бывает много. Все они нужны для обозначения неопределённости в результате выполнения арифметических операций, например, 6/0 или sqrt(-3).</p>
+<p>Итого, числовая прямая выглядит так: <img src="visualization_encodings.png" alt="Визуализация числовой прямой" /></p>
+<h2 id="Особенности-формата"><a class="header" href="#Особенности-формата">Особенности формата</a></h2>
+<ul>
+<li>
+<p><strong>Есть два нуля</strong>: +0 и -0. Однако это не приносит проблем при взаимодействии других чисел с ними. Оба нуля являются денормализованными.</p>
+</li>
+<li>
+<p>+0 имеет все нулевые биты, то есть является нулём как 32-битное целое число.</p>
+</li>
+<li>
+<p><strong>Сравнение</strong>: наименьшее положительное нормализованное число
+(\( 2^{-126} * 1,0\)) больше наибольшего денормализованного числа
+(\( 2^{-126} * 0,111..1\)).
+Также любое положительное нормализованное число с меньшим <code>exp</code>
+меньше любого положительного нормализованного числа с большим <code>exp</code>. Таким
+образом, действительно, все положительные денормализованные числа меньше всех
+положительных нормализованных, а нормализованные расположены в порядке
+показателя степени.</p>
+</li>
+<li>
+<p>Такой же <strong>порядок остаётся, если сравнивать</strong> битовые представления вещественных чисел <strong>как знаковые целые числа</strong>! (Кроме NaN-ов).</p>
+</li>
+<li>
+<p>Вещественные числа <strong>становятся более разреженными при увеличении</strong> их модуля. Чем число ближе к нулю, тем оно ближе к ближайшему к нему другому представимому числу. А точнее, денормализованные числа идут через одинаковый шаг. Нормализованные числа с <code>exp</code>=1 идут через удвоенный шаг, с <code>exp</code>=2 -- через учетверённый, и так далее. Иллюстрация распределения чисел: <img src="visualization_disribution.png" alt="Иллюстрация распределения" /></p>
+</li>
+</ul>
+<h2 id="Арифметические-операции"><a class="header" href="#Арифметические-операции">Арифметические операции</a></h2>
+<ul>
+<li><strong>Умножение</strong> числа на <strong>степень двойки</strong>. Достаточно прибавить/вычесть из показателя степени. При этом может получиться бесконечность.</li>
+<li><strong>Умножение</strong> двух чисел. Достаточно <strong>сложить их показатели степени и перемножить мантиссы</strong>.
+При этом в мантиссе может также получиться число &gt;= 2, тогда надо его нормализовать и прибавить 1 к показателю степени.
+<strong>Если мантисса</strong> результата не влезает в <code>23</code> бита, её <strong>надо округлить</strong>. Если хвост &lt; 1/2 или &gt; 1/2, то округляется вниз или вверх, соответственно. Если хвост в точности 1/2, то округлять всегда в одну сторону плохо, т.к. при большом количестве последовательных операций может накопиться существенная погрешность. Поэтому в этом случае округляется к ближайшему чётному (то есть, если предыдущий бит равен 0, то вниз, если 1 -- вверх). Пример:</li>
+</ul>
+<pre><code>  |23 бита|           |23 бита|
+1,01.....1101111 -&gt; 1,01.....11   // хвост &lt; 1/2, округляем вниз
+  |       |           |       |
+1,01.....0110011 -&gt; 1,01.....10   // хвост &gt; 1/2, округляем вверх
+  |       |           |       |
+1,01.....0010000 -&gt; 1,01.....00   // хвост = 1/2, округляем вниз
+  |       |           |       |
+1,01.....0110000 -&gt; 1,01.....10   // хвост = 1/2, округляем вверх
+</code></pre>
+<ul>
+<li><strong>Деление</strong> аналогично.</li>
+<li><strong>Сложение и вычитание</strong>. Привести оба числа к одинаковому показателю степени, выполнить операцию, привести к нормализованному или денормализованному виду и округлить по правилам выше, если потребуется.</li>
+</ul>
+<h2 id="Свойства-арифметических-операций"><a class="header" href="#Свойства-арифметических-операций">Свойства арифметических операций</a></h2>
+<ul>
+<li>При корректных арифметических операциях получается либо число, либо бесконечность.</li>
+<li>Сложение и умножение коммутативны</li>
+<li>Ассоциативности нет. Из-за округления в процессе выполнения операций могут получиться разные результаты. Например,
+\((3.14 + 2^{100}) - 2^{100} = 0\), но
+\(3.14 + (2^{100} - 2^{100}) = 3.14\).
+Из-за этого, для сохранения точности выполнять операции стоит в определённом порядке. Например, если хотим сложить массив вещественных чисел в одно число, лучше всего делать это в порядке сортировки чисел по возрастанию модулей.</li>
+<li>У конечных чисел есть обратный элемент по сложению.</li>
+<li>Монотонность: \(a\geq b \implies a+c\geq b + c\), если нет переполнений и NaN-ов.</li>
+</ul>
+<h2 id="Вещественные-числа-в-c"><a class="header" href="#Вещественные-числа-в-c">Вещественные числа в C</a></h2>
+<h3 id="Типы-и-их-особенности-в-c"><a class="header" href="#Типы-и-их-особенности-в-c">Типы и их особенности в C</a></h3>
+<p>В C есть типы <em>float</em>, <em>double</em> и <em>long double</em>. На нашей системе они имеют размер 4, 8 и 12 байт соответственно. В 64-битном формате <code>exp</code> занимает 11 бит, а <code>frac</code> -- 52. Некоторые гарантии на арифметику:</p>
+<ul>
+<li>f = -(-f) -- верно всегда.</li>
+<li>(d &lt; 0) =&gt; (2d &lt; 0) -- верно всегда, в том числе если получается <code>-inf</code>.</li>
+<li>(d &gt; f) =&gt; (-f &lt; -d) -- верно всегда</li>
+<li>d * d &gt;= 0 -- верно всегда</li>
+</ul>
+<p>Считая, что <em>int</em> также 32-битный, рассмотрим приведения типов:</p>
+<ul>
+<li>float -&gt; double: преобразутеся точно.</li>
+<li>double -&gt; float: может потеряться точность или стать inf (если был большой по модулю показатель степени).</li>
+<li>int -&gt; double: преобразуется точно, поскольку влезает в мантиссу.</li>
+<li>int -&gt; float: будет округлён, если int большой по модулю и есть маленькие биты (не влезает в мантиссу).</li>
+<li>float/double -&gt; int: дробная часть будет отброшена. Не определено, если целая часть не влезает в int.</li>
+</ul>
+<h3 id="Работа-с-вещественными-числами-в-c"><a class="header" href="#Работа-с-вещественными-числами-в-c">Работа с вещественными числами в C</a></h3>
+<p>Для наглядности далее будет полезно запускать такой код. Он выводит все части числа в удобном формате:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;math.h&gt;
+
+#define CHECK(exp) printf(#exp &quot; == %d\n&quot;, (exp))
+
+int main() {
+	union {
+		float f;
+		unsigned u;
+	} uf;
+	while (scanf(&quot;%f&quot;, &amp;uf.f) == 1) {
+		printf(&quot;f (%%e) = %e\n&quot;, uf.f);
+		printf(&quot;f (%%f) = %f\n&quot;, uf.f);
+		printf(&quot;f (%%g) = %g\n&quot;, uf.f);
+		printf(&quot;f (%%a) = %a\n&quot;, uf.f);
+		printf(&quot;u = %x\n&quot;, uf.u);
+		printf(&quot;sign = %u\n&quot;, uf.u &gt;&gt; 31);
+		printf(&quot;exp = %u\n&quot;, (uf.u &gt;&gt; 23) &amp; 0xff);
+		printf(&quot;frac = %x\n&quot;, uf.u &amp; 0x7fffff);
+		CHECK(fpclassify(uf.f));
+		CHECK(isnan(uf.f));
+		CHECK(isfinite(uf.f));
+		CHECK(isinf(uf.f));
+		CHECK(isnormal(uf.f));
+	}
+}
+</code></pre>
+<p>Спецификаторы printf:</p>
+<ul>
+<li><code>%f</code>, <code>%e</code>, <code>%g</code> -- float/double в 10-ой системе счисления.</li>
+<li><code>%a</code> -- float/double в 16-ой СС. Мантисса и показатель степени (c учётом смещения) разделаются символом <code>p</code>.
+Например, <code>4.375</code> = <code>0x1.18p+2</code>.</li>
+</ul>
+<p>Функции для работы с вещественными числами:</p>
+<ul>
+<li><code>int fpclassify(float/double)</code> -- возвращает класс числа, то есть одно из следующих значений: <code>FP_NAN</code>, <code>FP_INFINITE</code>, <code>FP_ZERO</code>, <code>FP_SUBNORMAL</code>, <code>FP_NORMAL</code>.</li>
+<li><code>int isnan(float/double)</code> -- является ли число NaN.</li>
+<li><code>int isfinite(float/double)</code> -- является ли число не NaN и не бесконечностью.</li>
+<li><code>int isinf(float/double)</code> -- 1, если +inf, -1, если -inf.</li>
+<li><code>int isnormal(float/double)</code> -- является ли число нормализованным.</li>
+</ul>
+<p>Чтобы использовать функции из <code>math.h</code>, необходимо компилировать программу с флагом <code>-lm</code>.</p>
+<h2 id="Инструкции-для-работы-с-вещественными-числами"><a class="header" href="#Инструкции-для-работы-с-вещественными-числами">Инструкции для работы с вещественными числами</a></h2>
+<p>У процессора есть отдельные регистры для обработки нескольких значений за одну инструкцию и, соответственно, отдельные инструкции для работы с этими регистрами.
+Есть 128-битные регистры XMM0-XMM31. В них можно поместить, например, 2 double, 4 float, 4 int, 8 short и т.д. Также есть 256-битные регистры YMM0-YMM31, являющиеся расширениями соответствующих XMM (по аналогии с AX-&gt;RAX). Аналогично, есть их 512-битные расширения, называемые ZMM0-ZMM31.</p>
+<p>Эти регистры исторически добавлялись в следующем порядке: XMM-&gt;YMM-&gt;ZMM. Инструкции для работы с YMM называются SSE, а для работы с ZMM -- AVX. Мы на курсе будем работать только с SSE.</p>
+<p>SSE инструкции:</p>
+<ul>
+<li><code>MOVAPD xmm1/m128 xmm2</code> -- положить два double, записанные в xmm1 (или в памяти) в xmm2. Если переклыдавем из памяти, она должна быть выровнена на 16 байт.</li>
+<li><code>MOVUPD xmm1/m128 xmm2</code> -- то же самое, только нет требования к выравниванию. Работает дольше.
+К счастью, и gcc при входе в функцию стек выравнивает на 16 байт, и *alloc выделяет память, выровненную на 16 байт, поэтому всегда можем использовать <code>MOVAPD</code>.</li>
+<li><code>ADDPD xmm1/m128 xmm2</code> -- прибавить два double из xmm1 или из памяти к xmm2 поэлементно.</li>
+<li><code>MOVSS e*x/m32 xmm2</code> -- загружает в младшие 32 бита xmm2.</li>
+<li><code>HADDPD xmm1/m128 xmm2</code> -- выполняет &quot;горизонтальное&quot; сложение в двух числах отдельно и записывает в результат эти результаты подряд: <img src="haddpd_example.png" alt="HADDPD example" /></li>
+</ul>
+<p>Все регистры XMM caller-saved (не надо сохранять внутри функции).</p>
+<h2 id="Как-gcc-компилирует-работу-с-вещественными-числами"><a class="header" href="#Как-gcc-компилирует-работу-с-вещественными-числами">Как gcc компилирует работу с вещественными числами.</a></h2>
+<p>Посмотрим, как следующая программа выглядит при компиляции с разными оптимизациями:
+<img src="work_with_float_example.png" alt="C_float_example" /></p>
+<ol>
+<li>Компилируем эту программу gcc без флагов оптимизации и в 32-битном режиме. Поскольку на 32-битной архитектуре мы не можем гарантировать, что процессор поддерживает SSE, то компилятор генерирует инструкции из устаревшего набора x87 (для сопроцессора). Мы с таким работать не хотим, поэтому идём дальше.</li>
+<li>Соберём без <code>-m32</code> (то есть для 64-битной архитектуры). Получились SSE-инструкции, но пока что работающие с float-ми по-одиночке. <img src="64bit_build_O0.png" alt="64bit build O0" /></li>
+<li>Соберём с O3 и <code>-mavx -ftree-vertorize</code>. Так мы скажем компилятору, что доступны инструкции AVX, и чтобы он векторизовал операции. Но он почему-то всё равно не векторизует :(</li>
+</ol>
+<p>Чтобы печатать float-ы через printf на 32-битной архитектуре, используются инструкции x87. А на 64-битной параметры типа float и double в printf передаются через регистры xmm. Подробнее не будем изучать.</p>
+<h2 id="Алгоритм-Кэхэна"><a class="header" href="#Алгоритм-Кэхэна">Алгоритм Кэхэна</a></h2>
+<p>Чтобы сложить много вещественных чисел более точно, можно использовать такой алгоритм, учитывающий ошибку округления:</p>
+<pre><code class="language-kotlin">function KahanSum(input)
+    var sum = 0.0                 // Prepare the accumulator.
+    var c = 0.0                   // A running compensation for lost low-order bits.
+
+    for i = 1 to input.length do  // The array input has elements indexed input[1] to input[input.length].
+        var y = input[i] - c      // c is zero the first time around.
+        var t = sum + y           // Alas, sum is big, y small, so low-order digits of y are lost.
+        c = (t - sum) - y         // (t - sum) cancels the high-order part of y; subtracting y recovers negative (low part of y)
+        sum = t                   // Algebraically, c should always be zero. Beware overly-aggressive optimizing compilers!
+    next i                        // Next time around, the lost low part will be added to y in a fresh attempt.
+
+    return sum
+</code></pre>
+<p>Идея в том, что отдельно считаются неточная сумма больших по модулю чисел (переменная <code>sum</code>) и компенсация для накопленной ошибки округления (переменная <code>c</code>).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../17-file-system/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../18-x86-floating-point/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../17-file-system/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../18-x86-floating-point/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/18-floating-point-arithmetic/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:04 GMT -->
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/19-process/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:05 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Процессы - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Процессы"><a class="header" href="#Процессы">Процессы</a></h1>
+<h2 id="Важные-команды"><a class="header" href="#Важные-команды">Важные команды</a></h2>
+<h3 id="ps"><a class="header" href="#ps">ps</a></h3>
+<pre><code>$ ps [OPTIONS] # информация о запущенных процессах
+</code></pre>
+<p>Пример использования:</p>
+<pre><code>$ ps aux
+</code></pre>
+<ul>
+<li>Опция <code>a</code> указывает ps вывести на дисплей процессы всех пользователей, за исключением тех процессов, которые не связаны с терминалом и процессами группы лидеров.</li>
+<li>Опция <code>x</code> в ps перечисляет процессы без управляющего терминала. В основном это процессы, которые запускаются во время загрузки и работают в фоновом режиме.</li>
+<li>Опция <code>e</code> указывает ps отобразить все процессы.</li>
+<li>Опция <code>f</code> — полноформатный список, который содержит подробную информацию о процессах.</li>
+</ul>
+<h3 id="proc"><a class="header" href="#proc">proc</a></h3>
+<p><code>/proc</code> — это виртуальная файловая система. Ее основная задача — получение состояния системы и частично выполнение управляющих действий.</p>
+<pre><code>$ ls /proc # вывод в консоль директории виртуальных каталогов и подкаталогов
+</code></pre>
+<h2 id="Что-такое-процесс"><a class="header" href="#Что-такое-процесс">Что такое процесс</a></h2>
+<ul>
+<li><em>Процесс</em> - это запись во внутренних структурах ядра, в которую ядро записывает ресурсы и планирует выполнение.
+Программа, которую мы написали и запустили - это <em>процесс</em>.</li>
+<li>У процесса есть своя виртуальная память и таблица файловых дескрипторов.</li>
+</ul>
+<h2 id="Параметры-процеса"><a class="header" href="#Параметры-процеса">Параметры процеса</a></h2>
+<ul>
+<li><code>USER</code> - от имени какого пользователя выполняется процесс. Стандартный пример: <code>root</code>.</li>
+<li><code>PID</code> - идентификатор процесса, у процессов выполняющихся в одно время он разный.</li>
+<li><code>STAT</code> - статус процесса. Примеры статусов: <code>S</code> - процесс в состоянии ожидания, <code>R</code> - выполняющийся процесс, <code>D</code> - процесс ожидает ввода/вывода.</li>
+</ul>
+<h3 id="Нужные-системные-вызовы"><a class="header" href="#Нужные-системные-вызовы">Нужные системные вызовы</a></h3>
+<ul>
+<li>
+<p>Системный вызов <code>sleep</code> - процесс будет спать в течение заданного количества секунд.</p>
+</li>
+<li>
+<p>Системный вызов <code>pause</code> - заставляет вызывающий процесс спать до тех пор, пока не поступит сигнал, который либо завершит процесс, либо вызовет функцию, ловящую данный сигнал.</p>
+</li>
+<li>
+<p>Системный вызов <code>wait</code> приостанавливает выполнение вызывающего процесса пока не завершится один из его дочерних процессов.</p>
+</li>
+</ul>
+<h2 id="Как-породить-новый-процесс"><a class="header" href="#Как-породить-новый-процесс">Как породить новый процесс?</a></h2>
+<ul>
+<li>Системный вызов <code>fork</code> - полностью копирует процесс, который его вызвал. Важно понимать, что хоть у них пространства виртуальной памяти изначально идентичные (сразу после копирования), они всё же отдельные. То есть изменение переменной в одном процессе не поменяет её в другой.</li>
+</ul>
+<h3 id="Как-это-использовать"><a class="header" href="#Как-это-использовать">Как это использовать</a></h3>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int main () {
+    fork();
+    printf(&quot;hello world from %d\n&quot;, getpid()); // id процесса - это целое число
+}
+</code></pre>
+<p>Данный код приведёт к тому, что pid выведется дважды, и это будут два разных числа. Важно понимать, что зацикливания не произойдёт, так как новый процесс начнёт выполняться с момента строго после <code>fork()</code>. Более наглядно это будет, если послетреть на output кода ниже.</p>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int main () {
+    printf(&quot;parent process\n&quot;);
+    fork();
+    printf(&quot;hello world from %d\n&quot;, getpid());
+}
+</code></pre>
+<p><strong>OUTPUT:</strong></p>
+<pre><code>parent process
+hello world from 2991610
+hello world from 2991611
+</code></pre>
+<p>Так как виртуальная память копируется, то любые изменения переменных в склонированном процессе будут локальными, однако иметь одинаковые адреса. Наглядно это можно увидеть из примера кода ниже.</p>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int x = 0;
+
+int main () {
+    fork();
+    ++x;
+    sleep(1); // для надёжности усыпим процесс, чтобы x успели поменять оба
+    printf(&quot;x = %d, &amp;x = %d\n&quot;, x, &amp;x);
+}
+</code></pre>
+<p><strong>OUTPUT:</strong></p>
+<pre><code>x = 1, &amp;x = 0x55f9 // разумеется реальный адрес будет длиннее,
+x = 1, &amp;x = 0x55f9 // но для наглядности взят короткий
+</code></pre>
+<p>Как же тогда в самом процессе понять дочерний он или родительский? Посмотреть на возвращаемое значение функции <code>fork</code>. В родительский процесс она возвращает <code>PID</code> дочернего, а в дочерний возвращает <code>0</code>. В случае ошибки возвращаемое значение равняется <code>-1</code>.
+Из этого также следует, что <code>PID</code> начинаются с <code>1</code>.</p>
+<p>Задан ли порядок выполнения родительского и дочернего процессов? Нет. Они могут выполняться в любом порядке и никак не синхронизированы.</p>
+<p>Зачем нам вообще нужно, чтобы в системе было много процессов? Например, чтобы разные пользователи могли запускать программы, или один пользователь мог одновременно запустить несколько программ.</p>
+<p>Что будет, если родительский процесс убить до того, как дочерний завершится? Для этого давайте посмотрим как будет выглядеть консоль целиком после выполнения кода ниже.</p>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int main () {
+    pid_t id = fork();
+    if (id == 0) {
+        printf(&quot;child process\n&quot;);
+        sleep(2);
+    } else {
+        print(&quot;parent process\n&quot;);
+    }
+    printf(&quot;Hello there\n&quot;);
+}
+</code></pre>
+<p><img src="kill_parent.png" alt="Что делает дочерний процесс, если родитель уже умер" /></p>
+<p>Что нужно знать про системный вызов <code>wait</code>? Если дочерний процесс уже завершился, а родительский ещё нет, то дочерний переходит с состояние <code>zombie/defunct process</code>, так как понимает, что родительский процесс всё ещё может захотеть вызвать <code>wait</code>.</p>
+<h2 id="Системный-вызов-для-файлов"><a class="header" href="#Системный-вызов-для-файлов">Системный вызов для файлов</a></h2>
+<h3 id="Что-происходит-при-вызове-open"><a class="header" href="#Что-происходит-при-вызове-open">Что происходит при вызове open?</a></h3>
+<ul>
+<li>Создаётся file descript<strong>ion</strong>.</li>
+<li>В таблицу c file descript<strong>ors</strong> передаётся ссылка на данный file descript<strong>ion</strong>.</li>
+<li>Индекс данной ссылки возвращается как результат системного вызова.</li>
+</ul>
+<p>У процесса таблица file descript<strong>ors</strong> представляет из себя массив из указателей на file descript<strong>ions</strong>.</p>
+<p>Сами file descript<strong>ions</strong> никак не привязаны к процессу.</p>
+<h3 id="Что-происходит-с-файловыми-структурами-при-системных-вызовах"><a class="header" href="#Что-происходит-с-файловыми-структурами-при-системных-вызовах">Что происходит с файловыми структурами при системных вызовах?</a></h3>
+<ul>
+<li><code>fork</code>:
+<ul>
+<li>struct file - увеличения счётчика указателей</li>
+<li>таблица file descript<strong>ors</strong> никак не изменится</li>
+</ul>
+</li>
+<li><code>close</code>:
+<ul>
+<li>уменьшение счётчика указателей</li>
+<li>file descript<strong>ion</strong> уничтожается, если на файл больше никто не указывает</li>
+</ul>
+</li>
+<li><code>lseek</code>:
+<ul>
+<li>меняется позиция в file descript<strong>ion</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>Важный факт:</strong> для разных процессов, читающих один и тот же файл, позиция считывания общая. То есть, когда читает один из процессов, указатель откуда чтение продолжится сдвигается для всех.</p>
+<h2 id="Атомарность"><a class="header" href="#Атомарность">Атомарность</a></h2>
+<p>В чём состоит вопрос?
+Не получится ли так, что мы из двух процессов выполняем чтение или запись с одним и тем же файлом, и позиции чтения и записи будут как-то несогласованы (помним, что указатель на текущую позицию в файле общий для процессов)?</p>
+<h3 id="Пример-не-атомарности"><a class="header" href="#Пример-не-атомарности">Пример не атомарности</a></h3>
+<p><img src="atom_ex.png" alt="Пример" /></p>
+<p>Решение: добавить флаг <code>O_EXCL</code>, таким образом файл не будет создан заново.</p>
+<h3 id="Пример-для-логирования"><a class="header" href="#Пример-для-логирования">Пример для логирования</a></h3>
+<p>Использование флага <code>O_APPEND</code> будет выполнять перемещение указателя на место записи в файле в самый конец и саму запись в данную позицию (то есть в конец файла) <strong>атомарно</strong>.</p>
+<h3 id="Ужасающий-пример-отсутствия-атомарности"><a class="header" href="#Ужасающий-пример-отсутствия-атомарности">Ужасающий пример отсутствия атомарности</a></h3>
+<p>POSIX (стандарт) - не даёт гарантий атомарности на запись или чтение из файла. Например результатом <code>write(&quot;123&quot;)</code> и <code>write(&quot;abc&quot;)</code> из разных процессов может быть <code>&quot;1a2b3c&quot;</code>.</p>
+<p>Но можно расслабиться, Linux запишет всё без перемешивания.</p>
+<h2 id="shebang"><a class="header" href="#shebang">shebang</a></h2>
+<p>При добавлении в скрипт записи вида <code>#!&lt;address&gt;</code>, запускается не сам скрипт, а интерпретатор <code>&lt;address&gt;</code>.</p>
+<p>Пример:</p>
+<pre><code>#!/usr/bin/python3
+
+print(&quot;hello&quot;)
+</code></pre>
+<p>bash не знает, что такое <code>print</code>, зато <code>/usr/bin/python3</code> знает.</p>
+<h2 id="Семейство-exec"><a class="header" href="#Семейство-exec">Семейство exec</a></h2>
+<h3 id="Что-происходит-при-вызове"><a class="header" href="#Что-происходит-при-вызове">Что происходит при вызове</a></h3>
+<ul>
+<li>Текущий процесс остаётся без изменений</li>
+<li>Исчезает только виртуальная память и появляется новое пространство виртуальной памяти</li>
+<li>В данную виртуальную память загружается бинарный файл и начинается его исполнение</li>
+</ul>
+<h3 id="Пример-для-понимания"><a class="header" href="#Пример-для-понимания">Пример для понимания</a></h3>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int main() {
+    execv(...);
+    perror(&quot;Error\n&quot;);
+}
+</code></pre>
+<p>Сообщение об ошибке не выведется, так как данный процесс начнёт исполнять уже другой бинарный файл.</p>
+<h3 id="Так-как-же-тогда-использовать"><a class="header" href="#Так-как-же-тогда-использовать">Так как же тогда использовать</a></h3>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+
+int main() {
+    pid_t child = fork();
+    if (child == 0) { // если мы в дочернем процессе
+        execv(...);
+    }
+    int status;
+    wait(&amp;status);
+    printf(&quot;Some code here&quot;\n);
+}
+</code></pre>
+<p>Здесь мы имеем, что дочерний процесс отдаст свои ресурсы под выполнение бинарного файла, а родительский продолжит выполнять свой код дальше. <code>wait</code> добавили, чтобы родительский процесс сначала дождался выполнения дочернего процесса.</p>
+<h3 id="dup2"><a class="header" href="#dup2">dup2</a></h3>
+<p>Системный вызов делает так, чтобы определенный файловый дескриптор (передаётся по номеру), смотрел туда же, куда и другой файловый дескприптор (тоже передаётся по номеру).</p>
+<p>Пример использования:</p>
+<p><img src="dup2.png" alt="dup2" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../22-sockets/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../25-shared-mem/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../22-sockets/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../25-shared-mem/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/19-process/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 12:00:06 GMT -->
+</html>

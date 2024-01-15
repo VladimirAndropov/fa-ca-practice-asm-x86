@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/interrupts/Interrupts.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:51 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Прерывания - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Interrupts.html" class="active"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="interrupts"><a class="header" href="#interrupts">Interrupts</a></h1>
+<h3 id="Про-прерывания-в-общих-чертах"><a class="header" href="#Про-прерывания-в-общих-чертах">Про прерывания в общих чертах.</a></h3>
+<p>В процессоре есть механизм (Traps), который наша операционная система использует и который обслуживает следующие три вещи:</p>
+<ol>
+<li>
+<p>Hardware interrupts (Аппаратные прерывания).</p>
+</li>
+<li>
+<p>Exception (Исключительные ситуации).</p>
+</li>
+<li>
+<p>Software interrupts (Программные прерывания).</p>
+</li>
+</ol>
+<p>Чего мы в принципе хотим добиться, используя этот механизм? Представим следующую ситуацию:</p>
+<pre><code class="language-nasm">mov ...
+nop &lt;---- eip
+add ...
+
+key_pressed:
+	in $KEYBOARD_PORT, %al // кладём в какой-то буффер.
+	iret // чо пон мниная единица * ret?? (выясним позже, что это такое)
+</code></pre>
+<p>Наша программа исполняет какие-то инструкции и тут в этом время пользователь жмёт кнопку на клавиатуре. Мы договорились заранее с процессором, что есть какой-то магический адрес key_pressed, на который во время прерывания должен перейти регистр eip, выполнить пару инструкций (положить нажатую кнопку в какой-то буффер, например) и прыгнуть обратно - исполнять код.</p>
+<h3 id="Как-происходит-механизм-аппаратных-асинхронных-прерываний-схематически"><a class="header" href="#Как-происходит-механизм-аппаратных-асинхронных-прерываний-схематически">Как происходит механизм аппаратных (асинхронных) прерываний схематически?</a></h3>
+<p>Примерно так:</p>
+<ol>
+<li>
+<p>Во-первых, процессор должен откуда-то узнать, что пользователь нажал на клавиатуру.</p>
+</li>
+<li>
+<p>Во-вторых, узнав об этом,  он должен где-то посмотреть - есть ли обработчик для данного события.</p>
+</li>
+<li>
+<p>В-третьих, выяснив, что обработчик есть - он должен это как-то обработать, сохранив текущее состояние процессора (включая все регистры).</p>
+</li>
+<li>
+<p>После обработки прерывания мы возвращаемся в наш код с помощью iret - инструкции, которая извлекает из стека три верхних значения и помещает их в регистры IP, CS и флагов. </p>
+</li>
+</ol>
+<p>У процессора есть свой флаг в регистре флагов - IF (interrupt flag), который недоступен к модификации из пользовательских программ (не из пользовательских возможно с помощью cli и sti) .</p>
+<p>Если IF взведён (то есть равен 1), то после каждой инструкции у процессора происходит проверка на наличие прерываний - если они есть, то происходит как раз тот самый механизм, который мы до этого обсуждали. </p>
+<p>Если же IF не взведён (=0), то процессор просто не реагирует на маскируемые аппаратные прерывания и откладывает эту реакцию до более удобного момента.</p>
+<h3 id="Про-остальное"><a class="header" href="#Про-остальное">Про остальное</a></h3>
+<p>Программные прерывания и исключения обрабатываются тем же самым механизмом ловушек. </p>
+<p>Вызвать программное прерывание можно с помощью ассемблерной инструкции int.</p>
+<h3 id="interrupt-controller-Контроллер-прерываний"><a class="header" href="#interrupt-controller-Контроллер-прерываний">Interrupt Controller (Контроллер прерываний)</a></h3>
+<p>Нам не хотелось бы обрабатывать приоритеты и очереди прерываний в самом процессоре, тем самым загружая его данной работой. Все эти обработки выносят в отдельную микросхему, которая называется interrupt controller. Мы будем пользоваться стандартом PIC (<em>Programmable Interrupt Controller</em>), который рассчитывает на то, что с ним работает один процессор. В современном компьютере все же устроено немного сложнее - там у каждого ядра процессора есть свой LAPIC (Local Advanded PIC), а глобально во всей системе есть IO APIC (Input Output APIC), который распределяет прерывания между ядрами.</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled.png" alt="Untitled" /></p>
+<p>Назревает сразу же вопрос - “Как же PIC узнает про то, что центральный процессор обработал прерывание и можно сбрасывать сигнал об этом прерывании и браться за следующее?”</p>
+<p>Так вот, CPU взаимодействует с PIC с помощью Port Mapped IO — так и узнает.</p>
+<h3 id="Как-устроены-прерывания-в-yabloko"><a class="header" href="#Как-устроены-прерывания-в-yabloko">Как устроены прерывания в Yabloko</a></h3>
+<p>Мы не хотим поллить клавиатуру и постоянно спрашивать о том, не перенажал ли пользователь какую-то кнопку и хотим ловить прерывание, которое присылает клавиатура, обрабатывать его и выводить символ, который к нам приехал. Что нам для этого понадобится? Для этого нам нужна таблица обработчиков прерываний. Для каждого приходящего нам прерывания у нас есть структура idt_gate_t. Для каждого номера прерывания в таблице обработчиков (про природу этих номеров чуть дальше) хранится структура, которая соответствующим образом выстраивает работу с памятью. Посмотрим как выглядит таблица:</p>
+<pre><code class="language-c">enum {
+    IDT_HANDLERS = 256,
+};
+
+idt_gate_t idt[IDT_HANDLERS];
+</code></pre>
+<p>То есть сами прерывания приходят в виде номера int X → handler, где handler - это структура idt_gate_t idt[X] в нашей таблице. В целом, обработчик это код, который лежит по адресу памяти. Теперь посмотрим на структуру idt_gate_t:</p>
+<pre><code class="language-c">typedef struct {
+    uint16_t low_offset;
+    uint16_t selector; // это поле содержит в себе номер сегмента, который 
+// будет загружен в cs. Менять значение cs может потребоваться, когда мы 
+// в пользовательском коде (режим с пониженными привилегиями) ловим прерывания,
+// но обрабатываем их уже в ядре (режим с повышенными привилегиями).
+    uint8_t always0;
+    uint8_t type: 4; // : 4 - означает, что поле type занимает только 4 бита
+// вместо 8
+    uint8_t s: 1;
+    uint8_t dpl: 2;
+    uint8_t p: 1;
+    uint16_t high_offset;
+} __attribute__((packed)) idt_gate_t;
+</code></pre>
+<p>Мы работаем в 32-битном режиме и соответственно адрес у нас также 32-битный, поэтому мы режем наш адрес на две части: low_offset (раньше было так, что она была 16-битная и была только эта часть) и high_offset (то, что добавили потом).</p>
+<p>Теперь поговорим про природу номеров прерываний, они же индексы в таблице прерываний. По-другому они называются векторами прерываний. Первые 32 вектора зарезервировал Intel, они же оставляют за собой право их доопределить до 32 (то есть до 31 номера) в следующих процессорах. Рассмотрим первые 19 из них, которые определены:</p>
+<pre><code class="language-c">const char * const exception_messages[] = {
+    [0] = &quot;Division By Zero&quot;,
+    [1] = &quot;Debug&quot;,
+    [2] = &quot;Non Maskable Interrupt&quot;,
+    [3] = &quot;Breakpoint&quot;,
+    [4] = &quot;Into Detected Overflow&quot;,
+    [5] = &quot;Out of Bounds&quot;,
+    [6] = &quot;Invalid Opcode&quot;, // на тот случай, когда процессор прочитал инстру-
+// -кцию, а декодировать её не может (возможно какой-то мусор попался)
+    [7] = &quot;No Coprocessor&quot;,
+
+    [8] = &quot;Double Fault&quot;, // случай когда, произошла исключительная ситуация с
+// номером от 0 до 7, но для неё не нашлось обработчика. Если обработчик не
+// сработал и для Double Fault, то возникает уже Triple Fault и процессор
+// перезагружается.
+    [9] = &quot;Coprocessor Segment Overrun&quot;,
+    [10] = &quot;Bad TSS&quot;,
+    [11] = &quot;Segment Not Present&quot;,
+    [12] = &quot;Stack Fault&quot;,
+    [13] = &quot;General Protection Fault&quot;, // случай, когда не хватает прав для рабо-
+// -ты с памятью, например, записываем что-то в read-only памяти. Эта же ситуация 
+// может возникнуть при программировании ядра, когда мы не написали
+// что-то для сегментов.
+    [14] = &quot;Page Fault&quot;,
+    [15] = &quot;Unknown Interrupt&quot;,
+
+    [16] = &quot;Coprocessor Fault&quot;,
+    [17] = &quot;Alignment Check&quot;,
+    [18] = &quot;Machine Check&quot;,
+};
+</code></pre>
+<p>Например, если процессор ловит исключительную ситуацию - “деление на 0”, он всегда возбуждает вектор прерывания с номером 0.</p>
+<p>Дальше нам хотелось бы иметь векторы, которые работают с прерываниями у разных устройств компьютера. Схема этого процесса выглядит таким образом:</p>
+<pre><code class="language-c">Device -&gt;&gt; PIC -&gt;&gt; CPU
+</code></pre>
+<p>Если что-то случилось с устройством компьютера, оно сигнализирует PIC об этом, PIC хранит информацию о том, что на устройстве было конкретное прерывание с конкретным номером и пока процессор не обработает его, PIC будет напоминать об этом CPU. Например, клавиатура, присоединенная на первой ноге к PIC, присылает IRQ1 (interrupt request - запрос на прерывание) на PIC, дальше PIC делает смещение относительно 0x20 для IRQ и уже на процессор приходит то, что вызван 33-й по счету вектор.</p>
+<p>Как обрабатывает прерывания сам процессор? Посмотрим на код:</p>
+<pre><code class="language-nasm">/*
+* mov ... // IF = 1
+* ------ // interrupt handling started
+* push eflags
+* push error_code
+* push eip
+* push cs
+* cli
+* ljmp handler_segment:handler_offset // cs, eip = handler_segment, handler_offset
+*/
+</code></pre>
+<p>Пусть выполняется какая-то инструкция (например, mov) во время исполнения которой был взведён флаг IF (Interrupt flag), то есть процессор будет готов к обработке прерываний. Дальше процессор проверяет не сигналит ли PIC о наличии прерывания и если он действительно сигналит, то он начинает обрабатывать это прерывание. Процессор сразу же начинает в текущем стеке обработку прерывания, то есть сразу после исполнения mov. Процессор кладет значение флагов, error_code (код ошибки - доп. информация о ней), instruction pointer’а, cs и отключает прерывания инструкцией cli, которая сбрасывает флаг IF, чтобы обработчик не мог сразу быть прерван ещё раз новым прерыванием. Далее процессор смотрит в таблицу с гейтами, добывает оттуда новое значение cs и eip, загружает их. Потом мы переходим на сегмент и адрес прерывания, который лежит в таблице обработчиков. Остальные регистры в процессе мы не трогали и чтобы их не испортить нам придется их самим сохранить и восстановить, когда мы закончим обрабатывать прерывание. Есть проблема: ни в какой момент никуда не сохраняется номер вектора прерывания. Единственное, что от него зависит это пушить или нет код ошибки (error_code) и на какой хэндлер (handler_segment:handler_offset) переходить. Другой информации о том, какой вектор прерывания мы обрабатываем у нас нет.</p>
+<h3 id="Обработчики"><a class="header" href="#Обработчики">Обработчики.</a></h3>
+<p>Рассмотрим ассемблерный файл cpu/vector.S, здесь мы с помощью макро языка создаем 256 обработчиков исключений, которые мы будем называть vector\i (можете дизассамблировать файл с помощью objdump и увидите 256 функций). Эти вектора кладутся в default_handlers.</p>
+<p>Рассмотрим сами вектора. На 31-ой строчке мы можем увидеть if — он кладет 0 в стек для тех векторов, в которых не был положен процессором код ошибки (это нужно для того, чтобы у всех обработчиков стек выглядел однородно). Потом уже мы делаем push номера обработчика.</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%201.png" alt="Untitled" /></p>
+<p>Далее мы прыгаем в функцию alltraps, которая является общим обработчиком прерываний и лежит в том же файле. </p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%202.png" alt="Untitled" /></p>
+<p>С 5-ой по 8-ую строчку мы сохраняем все сегментные регистры (регистр cs за нас уже сохранил процессор), а инструкцией pushal мы сохраняем все регистры общего назначения (чтобы потом их всех восстановить). Далее мы вызываем уже Си-шную функцию trap, определённую в cpu/idt.c.</p>
+<p>trap — это функция, которая принимает на вход указатель на структуру registers_t, которая уже в свою очередь определена в cpu/isr.h и выглядит следующим образом. </p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%203.png" alt="Untitled" /></p>
+<p>Нетрудно догадаться, что она просто хранит в себе всю информацию о сохраненных в alltraps регистров. </p>
+<p>И чтобы передать указатель на registers_t мы кладём в 15-ой строчке функции alltraps регистр esp, который как раз указывает на начало нашей структуры</p>
+<p>.</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%204.png" alt="Untitled" /></p>
+<p>Как видим — функция trap не слишком гостеприимна и сразу же нас встречает двумя if-ами с 89-ой по 94-ую строки. Объяснения такие: чтобы контролер прерываний передал следующее прерывание процессору — нужно ему сообщить, что предыдущее мы уже завершили. Поэтому мы должны сказать, что произошла ситуация EOI - end of interrupt, но поскольку контроллеров прерываний у нас два, то с 32-ого вектора по 40-ой мы сообщаем одному контроллеру, а с 40-ого уже двум. </p>
+<p>Далее мы уже в 97-ой строчке проверяем, что существует обработчик прерываний для нашего прерывания, и если он есть, то просто запускаем его.</p>
+<p>Если прерывание имеет номер до 32 (зарезервированные интелом номера), то мы просто вызываем функцию panic (заставляем ядро паниковать), предварительно напечатав сообщение об ошибке, которое мы взяли с соответствующей таблицы.</p>
+<h3 id="Пора-возвращаться-домой"><a class="header" href="#Пора-возвращаться-домой">Пора возвращаться домой.</a></h3>
+<p>После обработки исключения мы вернёмся обратно в функцию alltraps.</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%205.png" alt="Untitled" /></p>
+<p>с 17-ой по 25-ую строчку мы восстановим все регистры, которые мы положили в стек (popal - противоположность pushal) а в 26-ой строчке убираем код ошибки и номер вектора со стека.
+Далее вызываем iret, который восстанавливает cs, eip и eflags, тем самым мы возвращаемся в ту точку программы, на которой мы были прерваны для обработки прерывания.</p>
+<h3 id="Разбор-обработчика-прерываний-для-клавиатуры"><a class="header" href="#Разбор-обработчика-прерываний-для-клавиатуры">Разбор обработчика прерываний для клавиатуры.</a></h3>
+<p>Находится данный обработчик в файле driver/keyboard.c, загружаем мы его в таблицу обработчиков с помощью функции init_keyboard(), в которой вызывается register_interrupt_handler.</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%206.png" alt="Untitled" /></p>
+<p>В 18-ой строчке из порта клавиатуры мы читаем scancode — номер клавиши и в верхних старших битах сообщение о состоянии нажатия клавиши.</p>
+<p>Таблица сканкодов имеется в том же файлике:</p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%207.png" alt="Untitled" /></p>
+<p>А дальше просто очевидно обрабатываем scancode с таблицы и печатаем его на экран (25-ая строчка).</p>
+<h3 id="Как-хендлеры-попадают-в-таблицу-обработчиков-процессора"><a class="header" href="#Как-хендлеры-попадают-в-таблицу-обработчиков-процессора">Как хендлеры попадают в таблицу обработчиков процессора?</a></h3>
+<p>Это происходит благодаря функции load_idt (из cpu/idt), которая вызывается в _start (kernel.c). </p>
+<p><img src="Interrupts%20ec9425c586194a9899990eff69a46822/Untitled%208.png" alt="Untitled" /></p>
+<p>Функция init_idt просто заполняет нашу таблицу — она берёт адрес вектора из default_handlers и кладёт в таблицу <strong>idt_gate_t idt[IDT_HANDLERS]</strong>. Далее в специальную структуру мы кладём адрес нашей таблицы и с помощью ассемблерной инструкции lidt мы загружаем нашу таблицу обработчиков в процессор.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../13-io/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../15-rings/rings.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../13-io/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../15-rings/rings.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/interrupts/Interrupts.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:53 GMT -->
+</html>

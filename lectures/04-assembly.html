@@ -1,0 +1,349 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/04-assembly.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:34 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Язык ассемблера - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="04-assembly.html" class="active"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Язык-ассемблера"><a class="header" href="#Язык-ассемблера">Язык ассемблера</a></h1>
+<h2 id="Наш-подопытный-кролик--x86"><a class="header" href="#Наш-подопытный-кролик--x86">Наш подопытный кролик — x86</a></h2>
+<p><img src="ibm-pc.webp" alt="" />
+Компьютер IBM PC, выпущенный в 1981 году, оснащался процессором
+Intel 8088, а более поздние модели — процессорами
+80286, 80386 и 80486.</p>
+<h2 id="Машинный-код-и-язык-ассемблера"><a class="header" href="#Машинный-код-и-язык-ассемблера">Машинный код и язык ассемблера</a></h2>
+<p>Читать инструкции процессора в виде чисел очень неудобно (а писать тем более):</p>
+<pre><code>    2c93:       48 8d 91 00 00 fe ff
+    2c9a:       48 39 c2 
+    2c9d:       b8 00 00 02 00
+    2ca2:       48 0f 46 c1
+</code></pre>
+<p>Поэтому для инструкций придумывают названия (мнемоники) и правила записи
+их операндов, а потом делают
+конвертор из такого текстового представления в двоичное (машинный код).
+Такой конвертор называется ассемблером, а текстовое представление инструкций — языком ассемблера.</p>
+<pre><code class="language-x86asm">    lea    -0x20000(%rcx),%rdx
+    cmp    %rax,%rdx
+    mov    $0x20000,%eax
+    cmovbe %rcx,%rax
+</code></pre>
+<p>В мире x86 исторически больше всего используются два синтаксиса языка ассемблера: AT&amp;T vs Intel.
+Эти же инструкции в синтаксисе Intel выглядят так:</p>
+<pre><code class="language-x86asm">    lea rdx, [rcx - 0x20000]
+    cmp rdx, rax
+    mov eax, 0x20000
+    cmovbe rax, rcx
+</code></pre>
+<p>Можно заметить, что мнемоники инструкций в основном те же, но операнды записываются иначе
+и идут в другом порядке.</p>
+<p>Мы будем использовать синтаксис AT&amp;T, потому что в среде GNU он используется по умолчанию.</p>
+<h2 id="Регистры"><a class="header" href="#Регистры">Регистры</a></h2>
+<p>«Переменные» внутри процессора.</p>
+<pre><code>  von Neumann             closer to reality
+┌────────────────┐       ┌────────────────┐
+│  CPU           │       │ CPU            │
+│                │       │                │
+│ ┌────────────┐ │       │                │
+│ │Control unit│ │       │ Registers      │
+│ │            │ │       │                │
+│ │IP          │ │       │ (including IP) │
+│ └────────────┘ │       │                │
+│                │       │                │
+└────────┬───────┘       └────────┬───────┘
+         │                        │
+         │                        │
+┌────────┴───────┐       ┌────────┴───────┐
+│  Memory        │       │ Cache(s)       │
+│                │       │                │
+│                │       │                │
+│                │       └────────┬───────┘
+│                │                │
+│                │       ┌────────┴───────┐
+│                │       │ RAM            │
+│                │       │                │
+│                │       │                │
+└────────────────┘       └────────────────┘
+</code></pre>
+<p>Instruction pointer (program counter): <code>eip</code>.</p>
+<p>Регистры общего назначения (general purpose registers):</p>
+<div class="table-wrapper"><table><thead><tr><th>Регистр</th><th>Младшие 16 бит</th><th>Два младших байта</th></tr></thead><tbody>
+<tr><td><code>eax</code></td><td><code>ax</code></td><td><code>ah</code>, <code>al</code></td></tr>
+<tr><td><code>ebx</code></td><td><code>bx</code></td><td><code>bh</code>, <code>bl</code></td></tr>
+<tr><td><code>ecx</code></td><td><code>cx</code></td><td><code>ch</code>, <code>cl</code></td></tr>
+<tr><td><code>edx</code></td><td><code>dx</code></td><td><code>dh</code>, <code>dl</code></td></tr>
+<tr><td><code>esi</code></td><td><code>si</code></td><td>—</td></tr>
+<tr><td><code>edi</code></td><td><code>di</code></td><td>—</td></tr>
+<tr><td><code>ebp</code></td><td><code>bp</code></td><td>—</td></tr>
+</tbody></table>
+</div>
+<p>(Есть ещё регистр <code>esp</code>, который мы пока не трогаем.)</p>
+<h2 id="Первые-инструкции"><a class="header" href="#Первые-инструкции">Первые инструкции</a></h2>
+<p>Инструкция выглядит примерно так: <code>мнемоника операнд, операнд</code>.</p>
+<p>Операнд-регистр записывается после знака процента: <code>%eax</code>.</p>
+<p>Наша первая мнемоника: <code>mov</code>.</p>
+<pre><code class="language-x86asm">mov SRC, DST   // копировать SRC в DST
+
+movl %eax, %ebx // скопировать биты eax в ebx
+                // старое значение ebx теряется
+movw %ax, %bx
+movb %ah, %bl
+</code></pre>
+<p>Суффиксы размера операндов:</p>
+<ul>
+<li><code>b</code> (byte) — 8 бит</li>
+<li><code>w</code> (word) — 16 бит</li>
+<li><code>l</code> (long) — 32 бита</li>
+<li><code>q</code> (quad) — 64 бита (не используем)</li>
+</ul>
+<p><a href="https://www.felixcloutier.com/x86/mov">Справочник (в синтаксисе Intel)</a></p>
+<p><a href="https://www.felixcloutier.com/x86/index.html">Список инструкций</a></p>
+<p>Непосредственно заданный операнд:</p>
+<pre><code class="language-x86asm">movl $42, %ecx   // положить в %ecx битовое представление числа 42
+
+movl $0x80, %edx // шестнадцатеричная запись операнда
+movl $-1, %eax   // установить все биты eax в 1
+</code></pre>
+<h2 id="Библиотека-simpleio"><a class="header" href="#Библиотека-simpleio">Библиотека simpleio</a></h2>
+<pre><code>call writei32   // напечатать на экране значение eax
+                // как знаковое десятичное число
+call readi32    // ввести с клавиатуры число и сохранить в eax
+call readi64    // ввести с клавиатуры число и сохранить в edx:eax
+call writei64   // вывести edx:eax
+call finish     // завершить исполнение программы
+</code></pre>
+<p>Наша первая программа на языке ассемблера x86, вычисляющая сумму двух чисел:</p>
+<pre><code class="language-x86asm">    .global main
+main:
+    call readi32     // считали первое число
+    movl %eax, %ecx  // сохранили его в ecx
+    call readi32     // считали второе число в eax
+    addl %ecx, %eax  // сложили первое и второе
+    call writei32    // вывели результат
+    call finish      // завершили программу
+</code></pre>
+<p>Сохраним её в файл <code>sum.S</code> (да, заглавная S), оттранслируем и запустим:</p>
+<pre><code class="language-sh">$ gcc -m32 -g sum.S simpleio_i686.S -o sum
+$ ./sum
+</code></pre>
+<h2 id="Некоторые-арифметические-инструкции"><a class="header" href="#Некоторые-арифметические-инструкции">Некоторые арифметические инструкции</a></h2>
+<pre><code class="language-x86asm">add SRC, DST  // DST += SRC
+sub SRC, DST  // DST -= SRC
+inc DST       // DST++
+dec DST       // DST--
+neg DST       // DST = -DST
+not DST       // DST = ~DST
+and SRC, DST  // DST &amp;= SRC
+or  SRC, DST  // DST |= SRC
+xor SRC, DST  // DST ^= SRC
+</code></pre>
+<h2 id="Инструкции-сдвига"><a class="header" href="#Инструкции-сдвига">Инструкции сдвига</a></h2>
+<p>Логический сдвиг: двигаем биты внутри регистра,
+дополняя его нулями и теряя то, что «выпало».</p>
+<pre><code class="language-x86asm">movw $0x1234, %ax
+shrw $4, %ax        // ax == 0x0123
+shlw $4, %ax        // ax == 0x1230
+addw $7, %ax        // ax == 0x1237
+rorw $4, %ax        // ax == 0x7123
+</code></pre>
+<p>Арифметический сдвиг вправо: двигаем биты, дополняя
+слева знаковым битом</p>
+<pre><code class="language-x86asm">movw 0xfff0, %ax    // ax == -16
+sarw $4, %ax        // ax == 0xffff == -1
+salw $5, %ax        // ax == 0xfff0 == -16
+</code></pre>
+<p>См. также <a href="https://www.felixcloutier.com/x86/sal:sar:shl:shr">справочник</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="03-integers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="05-jumps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="03-integers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="05-jumps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/04-assembly.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:35 GMT -->
+</html>

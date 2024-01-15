@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/02-computers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:33 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Компьютеры - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="02-computers.html" class="active"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Что-же-такое-компьютер"><a class="header" href="#Что-же-такое-компьютер">Что же такое компьютер</a></h1>
+<p>Мы будем говорить про классические цифровые (а именно — двоичные) электронные программируемые вычислители.</p>
+<h3 id="Про-что-мы-говорить-не-будем"><a class="header" href="#Про-что-мы-говорить-не-будем">Про что мы говорить не будем</a></h3>
+<p><img src="computers/slide-rule.jpg" alt="Аналоговое устройство для вычислений — логарифмическая линейка" /></p>
+<p>Аналоговое устройство для вычислений — логарифмическая линейка</p>
+<p><img src="computers/felix.jpg" alt="Арифмометр «Феликс»" />
+Арифмометр «Феликс»</p>
+<p>The <strong>Z1</strong> was a motor-driven mechanical <a href="https://en.wikipedia.org/wiki/Computer">computer</a> designed by <a href="https://en.wikipedia.org/wiki/Konrad_Zuse">Konrad Zuse</a> from 1936 to 1937, which he built in his parents' home from 1936 to 1938. It was a binary electrically driven mechanical calculator with limited programmability, reading instructions from punched celluloid film.</p>
+<p><img src="computers/640px-German_Museum_of_Technology_Berlin_2017_024.jpg" alt="Цифровой двоичный программируемый механический вычислитель Z1 (модель)" /></p>
+<p>Цифровой двоичный программируемый механический вычислитель <a href="https://en.wikipedia.org/wiki/Z1_(computer)">Z1</a> (модель)</p>
+<p><strong>ENIAC</strong> (<a href="https://en.wikipedia.org/wiki/Help:IPA/English">/ˈɛniæk/</a>; <strong>Electronic Numerical Integrator and Computer</strong>) was the first <a href="https://en.wikipedia.org/wiki/Computer_programming">programmable</a>, <a href="https://en.wikipedia.org/wiki/Electronics">electronic</a>, general-purpose <a href="https://en.wikipedia.org/wiki/Digital_computer">digital computer</a>, completed in 1945. Although ENIAC was designed and primarily used to calculate <a href="https://en.wikipedia.org/wiki/Artillery">artillery</a> <a href="https://en.wikipedia.org/wiki/External_ballistics">firing tables</a> for the <a href="https://en.wikipedia.org/wiki/United_States_Army">United States Army</a>'s <a href="https://en.wikipedia.org/wiki/Ballistic_Research_Laboratory">Ballistic Research Laboratory</a>, its first program was a study of the feasibility of the <a href="https://en.wikipedia.org/wiki/Thermonuclear_weapon">thermonuclear weapon</a>.</p>
+<p><img src="computers/Two_women_operating_ENIAC_(full_resolution).jpg" alt="Бетти Джин Дженнигс и Рут Байлас программируют электронный компьютер ENIAC" /></p>
+<p>Бетти Джин Дженнигс и Рут Байлас программируют электронный компьютер ENIAC</p>
+<p><img src="computers/kvantovye-vychisleniya-otjig-s-vyklyuchatelyami-i-prochee-vesele-17.png" alt="Квантовый компьютер IBM Q" /></p>
+<p>Квантовый компьютер IBM Q</p>
+<h3 id="Про-что-мы-говорить-будем-архитектура-фон-Неймана"><a class="header" href="#Про-что-мы-говорить-будем-архитектура-фон-Неймана">Про что мы говорить будем: архитектура фон Неймана</a></h3>
+<p><a href="https://skillbox.ru/media/code/printsipy-fon-neymana-i-pervye-kompyutery-na-ikh-osnove/">https://skillbox.ru/media/code/printsipy-fon-neymana-i-pervye-kompyutery-na-ikh-osnove/</a></p>
+<p><img src="computers/von-neumann.png" alt="Архитектура фон Неймана" /></p>
+<p>Фон-Неймановский компьютер:</p>
+<ul>
+<li>электронный, цифровой;</li>
+<li>адресуемая память — набор одинаковых пронумерованных ячеек;</li>
+<li>хранимая программа в виде набора инструкций;</li>
+<li>инструкции исполняются по одной, в определённой последовательности; есть IP — instruction pointer, ячейка памяти внутри control unit, где хранится адрес текущей инструкции;</li>
+<li>инструкции и данные хранятся в одной и той же памяти, инструкции можно обрабатывать как данные.</li>
+</ul>
+<p>Von Neumann bottleneck: одна и та же <em>шина памяти</em>
+используется для передачи инструкций и данных.</p>
+<p>Типичный шаг исполнения программы:</p>
+<ul>
+<li>fetch — из памяти приносим следующую инструкцию;</li>
+<li>decode — определяем, как она будет исполняться;</li>
+<li>execute — исполнение:
+<ul>
+<li>производим вычисления и обновляем операнды;</li>
+<li>обновляем instruction pointer.</li>
+</ul>
+</li>
+</ul>
+<pre><code>   ┌───────────────┐
+   │               │
+   │               │             ┌─────────────┐
+...│               │             │     IP      │
+   ├───────────────┤             │             │
+247│ add x, 1      │◄──────┐     │             │
+   ├───────────────┤       └─────┤     247     │
+248│ jmp 247       │             └─────────────┘
+   ├───────────────┤
+249│               │
+   ├───────────────┤
+250│               │
+   ├───────────────┤
+...│               │
+   │               │
+   │               │
+   │               │
+   └───────────────┘
+</code></pre>
+<p>ISA (instruction set architecture) —
+набор инструкций конкретного компьютера, их семантика
+и способ кодирования в памяти.
+Примеры ISA: x86, ARM, MIPS, RISC-V.</p>
+<p>Компьютеры с одинаковой ISA могут быть по-разному
+устроены на уровне <em>микроархитектуры</em> — от этого
+может зависеть скорость или эффективность исполнения программ.</p>
+<p>См. также: гарвардская архитектура (инструкции и данные отдельно): <a href="https://en.wikipedia.org/wiki/Harvard_architecture">https://en.wikipedia.org/wiki/Harvard_architecture</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="01-course.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="03-integers.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="01-course.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="03-integers.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/02-computers.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:34 GMT -->
+</html>

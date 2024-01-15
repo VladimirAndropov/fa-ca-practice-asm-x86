@@ -1,0 +1,545 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/16-files/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:53 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Файлы - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="Операционная-система"><a class="header" href="#Операционная-система">Операционная система</a></h2>
+<p>ПО, которое организует доступ к ресурсам компьютера:</p>
+<ul>
+<li>унифицирует (драйверы, файловая система, ...);</li>
+<li>разделяет (вытесняющая многозадачность, виртуальная память, ...);</li>
+<li>разграничивает (права доступа для пользователей, ...).</li>
+</ul>
+<p>Чтобы ОС могла выполнять свои функции, нужна поддержка
+со стороны процессора: привилегированный режим,
+в котором будет исполняться часть ОС, называемая
+<em>ядром</em> (kernel).</p>
+<pre><code> Прикладные программы
+
+ Системные утилиты
+
+                                       Userspace
+────────────────────────────────────────────────────────
+                                       Kernelspace
+ Ядро ОС                              (привилегированный
+                                       режим)
+</code></pre>
+<h2 id="Переносимость-и-совместимость"><a class="header" href="#Переносимость-и-совместимость">Переносимость и совместимость</a></h2>
+<p>API (application programming interface) — контракт на уровне
+исходного кода (source-level).</p>
+<p>Пример — API стандартной библиотеки языка Си.</p>
+<p>ABI (application binary interface) — контракт на уровне
+машинного кода и двоичного представления данных:
+соглашения о вызовах, способы компоновки,
+порядок загрузки и запуска программы,
+интерфейс взаимодействия с ядром ОС.
+Нас будет особенно интересовать ABI Linux/x86.</p>
+<h2 id="Семейство-юниксовых"><a class="header" href="#Семейство-юниксовых">Семейство юниксовых</a></h2>
+<p>Картинка из Википедии:
+<img src="../../../upload.wikimedia.org/wikipedia/commons/c/cd/Unix_timeline.en.svg" alt="" /></p>
+<p>В 70-х Кен Tомпсон и Деннис Ричи разработали ОС Research UNIX. В 80-е AT&amp;T ее
+коммерциализировала. В это же время Ричард Столлман придумал проект GNU, для
+него не хватало ядра. В 90-е Линус Торвальс начал разрабатывать Linux, проект
+GNU его подхватил. Теперь мы пользуемся ОС GNU/Linux, название означает OC GNU и
+ядро Linux.</p>
+<p>Все это развивалось в разных направлениях, переносить программы между разными юниксами было тяжело, были попытки обеспечить переносимость программ между разными юниксами.</p>
+<p>В 1985 году компания AT&amp;T специфицировала UNIX System V в документе
+<a href="https://en.wikipedia.org/wiki/System_V_Interface_Definition">System V Interface Definition (SVID)</a>.</p>
+<p>В 1988 рабочая группа IEEE выпустила первый стандарт POSIX (portable operating system interface), который стандартизировал, что такое UNIX.</p>
+<p><a href="https://xkcd.com/927/">xkcd: How standards proliferate</a></p>
+<p>1994, X/Open: Single UNIX Specification (SUS).</p>
+<h2 id="Системные-вызовы-на-linuxx86"><a class="header" href="#Системные-вызовы-на-linuxx86">Системные вызовы на Linux/x86</a></h2>
+<p>Осуществляются (пока что магической) инструкцией <code>int $0x80</code>.
+В регистре <code>eax</code> должен быть номер системного вызова,
+а в регистрах <code>ebx</code>, <code>ecx</code> и <code>edx</code> — его аргументы по порядку.</p>
+<p>Результат системного вызова возвращается в регистре <code>eax</code>.</p>
+<p>Напишем программу <code>bare.S</code>, которая делает системный вызов <code>exit</code>,
+не пользуясь стандартной библиотекой языка Си:</p>
+<pre><code>#include &lt;sys/syscall.h&gt;
+
+    .global _start
+_start:                  // default ELF entry point
+    mov $SYS_exit, %eax  // SYS_exit == 1
+    mov $42, %ebx        // exit(int status) ← status = 42
+    int $0x80
+</code></pre>
+<p>Соберём её:</p>
+<pre><code>gcc -m32 -static -nostdlib bare.S -o bare
+</code></pre>
+<p>То же самое в виде программы на языке Си:</p>
+<pre><code>#include &lt;sys/syscall.h&gt;
+
+void _start() {
+    asm volatile (&quot;int $0x80&quot; : : &quot;a&quot;(SYS_exit), &quot;b&quot;(42));
+}
+</code></pre>
+<p>Системные вызовы документированы в секции 2 руководства
+(<strong>man</strong>ual), поэтому почитать документацию на системный вызов
+exit можно так: <code>man 2 exit</code>.</p>
+<h2 id="Файлы"><a class="header" href="#Файлы">Файлы</a></h2>
+<p>Главная сущность, которую мы будем изучать - файлы, поскольку в unix-подобных
+системах почти все ресурсы представлены именно через эту абстракцию.</p>
+<p>Файл — последовательность байт, к которой ОС предоставляет
+доступ посредством <em>файловых операций</em>.</p>
+<p>Например:</p>
+<ul>
+<li>файл на диске;</li>
+<li>вывод программы;</li>
+<li>пользовательский ввод;</li>
+<li>бесконечная последовательность случайных байт;</li>
+<li>всё содержимое диска;</li>
+<li>...</li>
+</ul>
+<pre><code>    ───────────────────────────
+... Mary had a little lamb, its ...
+    ───────────────────────────
+          ▲
+          │ file position
+
+read(1) → &quot;a&quot;
+read(5) → &quot;d a l&quot;
+read(5) → &quot;ittle&quot;
+write(5, &quot; wolf&quot;)
+
+    ───────────────────────────
+... Mary had a little wolf, its ...
+    ───────────────────────────
+                          ▲
+                          │
+
+lseek(-3, SEEK_CUR)  // move file position 3 bytes to the left
+
+    ───────────────────────────
+... Mary had a little wolf, its ...
+    ───────────────────────────
+                       ▲
+                       │
+</code></pre>
+<p>Заметим, что системные вызовы write/read/lseek могут не иметь смысла при работе с
+конкретным файлом. Например, в файл “пользовательский ввод” нельзя ничего
+записать или подвинуть позицию чтения/записи.</p>
+<p>Конец файла (EOF):</p>
+<pre><code>    ─────────────────────────┐
+... il sole e l'altre stelle.│
+    ─────────────────────────┘
+                      ▲
+                      │
+
+read(10) → &quot;stelle.&quot;
+read(10) → &quot;&quot;
+write(5, &quot; FIN.&quot;)
+
+    ──────────────────────────────┐
+... il sole e l'altre stelle. FIN.│
+    ──────────────────────────────┘
+                                  ▲
+                                  │
+</code></pre>
+<blockquote>
+<p>Q. А как пользователь понимает, где EOF?</p>
+<p>A. EOF - ситуация, она нигде. EOF (end of file) -  это не специальный символ, а ситуация, когда после запроса на считывание байтов считывается 0 байт.</p>
+</blockquote>
+<h2 id="Файловые-дескрипторы"><a class="header" href="#Файловые-дескрипторы">Файловые дескрипторы</a></h2>
+<p>Операции для работы с файлами - это системные вызовы, то есть обращения к ядру.
+Чтобы объяснить ядру, c каким из файлов мы хотим работать, нужны идентификаторы.
+В качестве идентификаторов выступают файловые дескрипторы — целые числа.</p>
+<pre><code>               char buf[10];
+               int fd = 3;
+               read(fd, buf, sizeof(buf));
+Userspace
+──────────────────────────────────────────
+Kernelspace
+               0 → keyboard
+               1 → display
+               2 → display
+               3 → somefile.txt
+</code></pre>
+<ul>
+<li>0 (<code>STDIN_FILENO</code>) — standard input</li>
+<li>1 (<code>STDOUT_FILENO</code>) — standard output</li>
+<li>2 (<code>STDERR_FILENO</code>) — standard error output </li>
+</ul>
+<blockquote>
+<p>Q. Для разных процессов разные дескрипторы?</p>
+<p>A. Да, у каждого процесса есть собственная таблица файловых дескрипторов.</p>
+</blockquote>
+<h2 id="posix-file-api"><a class="header" href="#posix-file-api">POSIX file API</a></h2>
+<h3 id="Системные-вызовы-read-и-write"><a class="header" href="#Системные-вызовы-read-и-write">Системные вызовы read и write</a></h3>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+
+ssize_t read(int fd, void *buf, size_t count); // ssize_t - знаковый size_t, нужен, чтобы помещалось значение -1
+ssize_t write(int fd, const void *buf, size_t count);
+</code></pre>
+<ul>
+<li>если считывание прошло успешно, read возвращает количество считанных байт (0, если достигли конца файла)</li>
+<li>если произошла ошибка, read возвращает -1, а также выставляет специальную переменную <code>errno</code>. В <code>errno</code> хранится номер последней произошедшей при системных вызовах ошибки</li>
+</ul>
+<p>Напишем программу mycat, которая будет читать байты со стандартного входа и
+писать их на стандартный выход с помощью системных вызовов.</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+
+int main() {
+    char c; // наш буфер в один байт
+    while (read(STDIN_FILENO, &amp;c, sizeof(c)) &gt; 0) { // STFIN_FILENO = 0
+        write(STDOUT_FILENO, &amp;c, sizeof(c)); // STDOUT_FILENO = 1
+    }
+}
+</code></pre>
+<p>Чтобы сделать конец файла, нажмем ctrl + d. Так драйвер терминала порождает конец файла.</p>
+<blockquote>
+<p>Q. Получается, ядро считывает ввод до \n?</p>
+<p>A. Да. Это можно поменять с помощью драйвера терминала.</p>
+</blockquote>
+<p>Команда strace показывает, какие системные вызовы совершает наша программа. Использовать вот так: <code>strace ./mycat</code></p>
+<p>Наш буфер сейчас 1 байт. Если файл очень большой, то программа будет работать
+долго, поскольку каждый системный вызов занимает некоторое время. Давайте
+увеличим буфер, в который читаем файл.</p>
+<blockquote>
+<p>Q. Не получится ли плохая ситуация, когда в файле осталось читать только 100 байт, а мы просим 200?</p>
+<p>A. Нет, когда мы просим считать больше байтов, чем осталось на чтение в файле, read считывает, сколько есть.</p>
+</blockquote>
+<h3 id="Системный-вызов-open"><a class="header" href="#Системный-вызов-open">Системный вызов <strong>open</strong></a></h3>
+<pre><code class="language-c">int open(const char *pathname, int flags);
+int open(const char *pathname, int flags, mode_t mode);
+</code></pre>
+<ul>
+<li>Если файл удалось открыть, <code>open</code> возвращает файловый дескриптор</li>
+<li>Если не удалось, <code>open</code> вернет -1, а также выставит номер ошибки в errno</li>
+</ul>
+<p>Заметим, что приведены две функции open с разными сигнатурами. Язык С так не умеет, на самом деле функция open принимает произвольное количество параметров.</p>
+<p>Напишем программу, которая умеет работать с аргументами командной строки</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void catfile(int sourcefd) {
+    char buf[10000];
+    ssize_t result;
+    while ((result = read(sourcefd, buf, sizeof(buf))) &gt; 0) {
+        write(STDOUT_FILENO, buf, result);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    if (argc == 1) {
+        catfile(STDIN_FILENO);
+    } else {
+        for (int f = 1; f &lt; argc; ++f) {
+            int fd = open(argv[f], O_RDONLY); // в argv[f] путь к файлу
+            if (fd &lt; 0) {
+                perror(&quot;error opening file&quot;); // print error, лежит в &lt;stdio.h&gt;. принимает строку, печтает ее и сообщение об ошибке, исходя из errno
+                return EXIT_FAILURE;  // EXIT_FAILURE = 1
+            }
+            catfile(fd);
+            close(fd);  // всего 1024 доступных файловых дескрипторов, хочется избежать, чтобы при каждом open давали новый файловый дескриптор
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p>Q. Функция <code>_start</code> тоже принимает на вход аргументы командной строки?</p>
+<p>A. Да, но в стеке.</p>
+</blockquote>
+<h2 id="Флаги"><a class="header" href="#Флаги"><strong>Флаги</strong></a></h2>
+<ul>
+<li>Режима доступа к файлу: O_RDONLY, O_WRONLY и O_RDWR</li>
+<li>O_TRUNC обрезает файл, при открытии он получит размер 0</li>
+<li>O_CREAT создаст файл, если его нет</li>
+<li>O_APPEND установит файловую позицию чтения/записи на конец файла</li>
+</ul>
+<h3 id="Системный-вызов-lseek"><a class="header" href="#Системный-вызов-lseek"><strong>Системный вызов lseek</strong></a></h3>
+<pre><code class="language-c">off_t lseek(int fd, off_t offset, int whence);
+</code></pre>
+<p><em>offset</em> - на сколько байт перемотать относительно точки отсчета</p>
+<p><em>whence</em> - точка отсчета:</p>
+<ul>
+<li><code>SEEK_SET</code> - с начала файла</li>
+<li><code>SEEK_CUR</code> - с текущей позиции</li>
+<li><code>SEEK_END</code> - с конца файла</li>
+</ul>
+<p>Напишем программу, которая перематывает файл на заданную позицию и там что-то записывает.</p>
+<pre><code class="language-c">#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+const char usage[] = &quot;Usage: binpatch FILE OFFSET DATA\n&quot;;
+
+int main(int argc, char *argv[]) {
+    if (argc != 4) {
+        write(STDERR_FILENO, usage, strlen(usage));
+        return EXIT_FAILURE;
+    }
+
+    const char *name = argv[1];
+    int offset = atoi(argv[2]);
+    const char *data = argv[3];
+
+    int fd = open(name, O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR); // если передать название несуществующего файла, то благодаря O_CREAT он будет создан
+    if (fd &lt; 0) {
+        perror(name);
+        return EXIT_FAILURE;
+    }
+
+    if (lseek(fd, offset, SEEK_SET) &lt; 0) {
+        perror(&quot;seek&quot;);
+        return EXIT_FAILURE;
+    }
+    
+    if (write(fd, data, strlen(data)) &lt; 0) {
+        perror(&quot;write&quot;);
+        return EXIT_FAILURE;
+    }
+
+    off_t position = lseek(fd, 0, SEEK_CUR);  // lseek возвращает смещение от начала записи после исполнения
+    ftruncate(fd, position);  // обрезает файл
+    // можно не закрывать файл, поскольку мы выходим из программы, и ОС подчистит все наши файловые дескрипторы 
+}
+</code></pre>
+<ul>
+<li>Если в пустом файле сдвинуть позицию на 5 байт и записать туда 3 байта, то размер файла станет 8, первые 5 байт заполнятся нулями</li>
+<li><code>/dev/stdin</code> для каждого процесса показывает его стандартный вход, в этом файле нельзя переставить позиции чтения и записи. Если передать этот файл в нашу программу, словим ошибку ESPIPE (illegal seek).</li>
+</ul>
+<h2 id="Переносимость-в-языке-си"><a class="header" href="#Переносимость-в-языке-си"><strong>Переносимость в языке си</strong></a></h2>
+<p>Если мы хотим, чтобы наши программы были переносимы, то пользоваться вызовами, которые стандартизированы POSIX, нельзя. Поэтому язык С предоставляет стандартизированные способы работы с файлами.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+FILE *fopen(const char *pathname, const char *mode);
+</code></pre>
+<ul>
+<li>при успехе возвращает указатель на структуру FILE</li>
+<li>при ошибке возвращает NULL и выставляет номер ошибки в errno</li>
+</ul>
+<p>Заметим, что <code>mode</code> передаем как символьную строку, она может принимать следующие значения:</p>
+<p><img src="images/image8.png" alt="image8" /></p>
+<p>Перенос строки <code>\n</code> в UNIX-подобных ОС - это символ с кодом 10, а на Windows перевод строки - это символы CR и LF (коды 13 и 10). Ради переносимости язык C работает с текстовым файлами так, чтобы <code>\n</code> превращался в тот символ переноса, что нужен на конкретной платформе. Эту опцию можно отключить, добавив в конце <code>mode</code> букву b.</p>
+<pre><code class="language-c">// другие функции библиотеки С для работы с файлами
+
+int fclose(FILE *stream);
+int fprintf(FILE *stream, const char *format, ...);
+int fseek(FILE *stream, long offset, int whence);
+</code></pre>
+<p>Стандартная библиотека языка С создает потоки ввода/вывода буферизованными: данные накапливаются в буфере, пока он не заполнится. Только тогда данные передаются в системный вызов write.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt; 
+#include &lt;unistd.h&gt;
+
+int main() {
+    FILE *f = fopen(&quot;poem. txt&quot;, &quot;w&quot;);
+    fprintf(f, &quot;some string&quot;);
+    fprintf(f, &quot; and some other string\n&quot;);
+    pause();
+    fclose(f);
+}
+</code></pre>
+<p>Если во время выполнения <code>pause</code> убить программу, то в файл poem.txt ничего не запишется. Чтобы принудительно очистить буфер, нужно написать <code>fflush(f)</code> перед <code>pause</code>. Если убрать <code>pause</code> и не закрывать файл, то данные все равно окажутся на диске, т.к. когда завершается <code>main</code>, стандартная библиотека языка С вызывает функцию <code>exit</code>, которая закрывает все потоки ввода и вывода, очищая их буферы.</p>
+<p>Но нам не всегда хочется при завершении программы закрывать потоки, поэтому можно самим вызвать системный вызов exit:</p>
+<pre><code class="language-c">syscall(SYS_exit, EXIT_SUCCESS);
+</code></pre>
+<pre><code class="language-c">void _exit(int status); // функция в POSIX. завершает программу, но не сбрасывает буфер
+void _Exit(int status); // аналогичная функция в стандартной библиотеке си
+</code></pre>
+<p>Бывают потоки, буферизованные построчно. Например, стандартные потоки ввода/вывода. При встрече <code>\n</code> они сбрасывают буфер. <code>stderr</code>, напротив, не буферизован, благодаря этому сообщения об ошибках появляются сразу.</p>
+<pre><code class="language-c">void setbuf(FILE *stream, char *buf); // для управления буферизацией
+void setlinebuf(FILE *stream); // для строчной буферизации
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../15-rings/rings.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../17-file-system/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../15-rings/rings.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../17-file-system/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/16-files/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:54 GMT -->
+</html>

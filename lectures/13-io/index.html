@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/13-io/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:50 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>«Системное программирование» - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="index.html" class="active"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="../15-rings/rings.html"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="Операционная-система"><a class="header" href="#Операционная-система">Операционная система</a></h2>
+<p>Комплекс программ.</p>
+<p>Организует доступ к ресурсам ЭВМ:</p>
+<ul>
+<li>унифицирует,</li>
+<li>разграничивает,</li>
+<li>мультиплексирует,</li>
+<li>учитывает и квотирует.</li>
+</ul>
+<p>Для всего этого требуется привилегированный режим
+работы процессора.
+Часть ОС, использующую этот режим, принято называть <em>ядром</em>
+(kernel).</p>
+<p>Ядро бывает:</p>
+<ul>
+<li>монолитное,</li>
+<li>модульное (например, Linux),</li>
+<li>микроядро (microkernel).</li>
+</ul>
+<h2 id="Взаимодействие-с-устройствами"><a class="header" href="#Взаимодействие-с-устройствами">Взаимодействие с устройствами</a></h2>
+<p>Memory-mapped и port-mapped IO.</p>
+<p><img src="../system_bus.png" alt="" /></p>
+<p>Например, видеопамять </p>
+<p>Работа с портами: инструкции <a href="https://www.felixcloutier.com/x86/in">in</a>, <a href="https://www.felixcloutier.com/x86/out">out</a>.</p>
+<p>Например, VGA использует, кроме прочих, порты 0x3d4 и 0x3d5.</p>
+<p>Polling.</p>
+<h2 id="Загрузка-компьютера-с-bios"><a class="header" href="#Загрузка-компьютера-с-bios">Загрузка компьютера с BIOS</a></h2>
+<p>(сейчас на вашем x86-совместимом компьютере UEFI, но идея та же)</p>
+<p>Часть адресов RAM отображена на ROM, где лежит firmware.</p>
+<p><a href="https://wiki.osdev.org/Memory_Map_(x86)">Структура адресуемой памяти x86</a></p>
+<p>При включении компьютера процессор работает в режиме совместимости
+с IBM PC (16-битный <em>real mode</em>), исполнение начинается
+по адресу 0xFFFF0 (<em>reset vector</em>).</p>
+<h3 id="Сегментная-модель-памяти--"><a class="header" href="#Сегментная-модель-памяти--">Сегментная модель памяти :-(</a></h3>
+<p>IBM PC мог адресовать 1 MB памяти (20-битная шина адреса),
+а регистры были 16-битные.</p>
+<p>Сегментные регистры: <code>cs</code>, <code>ds</code>, <code>es</code>, <code>ss</code> (<code>fs</code>, <code>gs</code> в 32-битном режиме).</p>
+<p>Каждое обращение к памяти происходит по адресу из двух частей:
+сегментные регистр и смещение. Физический адрес равен <code>16 * seg + offset</code>.</p>
+<pre><code class="language-x86asm">    mov [ds:ax], 42  // обращение к памяти по адресу 16 * ds + ax
+</code></pre>
+<h3 id="Загрузка-с-диска"><a class="header" href="#Загрузка-с-диска">Загрузка с диска</a></h3>
+<p>BIOS инициализирует и тестирует оборудование компьютера,
+а затем читает с загрузочного диска первый <em>сектор</em> (512 байт)
+и передаёт ему управление.</p>
+<h2 id="Учебная-ОС-yabloko"><a class="header" href="#Учебная-ОС-yabloko">Учебная ОС yabloko</a></h2>
+<p><a href="https://github.com/hse-cs-ami/yabloko-public">Гитхаб</a>.</p>
+<p>Учебную операционную систему мы запускаем в эмуляторе. Скрипт установки под macOS и Linux находится в файле <code>setup.sh</code>.</p>
+<p>Среди файлов есть <code>mbr.S</code> (master boot record). Он должен умещаться в 512 байт и будет складываться в первый сектор эмулируемого жесткого диска.</p>
+<h3 id="drivers"><a class="header" href="#drivers">DRIVERS</a></h3>
+<p>В  <code>drivers/port.h</code> лежат обертки port-mapped IO для языка C, написанные в виде ассемблерных вставок:</p>
+<pre><code class="language-c">static inline unsigned char port_byte_in(unsigned short port) {
+    unsigned char result;
+		// инструкция in, берет номер порта из регистра %dx, а кладёт результат в регистр %al
+    __asm__(&quot;in %%dx, %%al&quot; : &quot;=a&quot; (result) : &quot;d&quot; (port));
+    return result;
+}
+</code></pre>
+<p>Нам нужно что-то печатать на экран, для этого есть <code>drivers/vga.h</code> и <code>drivers/vga.с</code> для работы со стандартным графическим адаптером VGA. Когда компьютер загружается, экран работает в текстовом режиме и содержит 25 строк и 80 столбцов. Линейно лежат пары байт: в одном — символ, в другом — цвет фона и цвет самого символа. Символы нумеруются построчно начиная с левого верхнего края экрана.</p>
+<pre><code class="language-c">char* const video_memory = (char*) 0xb8000; // видео-память отображена по адресу 0xb8000 (memory-mapped IO)
+
+void vga_set_char(unsigned offset, char c) {
+    video_memory[2 * offset] = c;                                  // сам символ
+    video_memory[2 * offset + 1] = get_color(light_gray, black);   // цвет; пишем светло-серым по черному
+}
+</code></pre>
+<p>Так как мы не всегда будем пользоваться эмулятором в графическом режиме (не всегда будет настоящий монитор), необходимо эмулировать также последовательный порт, способный передавать байты. Код в <code>drivers/uart.h</code> и <code>drivers/uart.c</code></p>
+<h3 id="kernel"><a class="header" href="#kernel">KERNEL</a></h3>
+<p>Посмотрим на <code>kernel.c</code>:</p>
+<pre><code class="language-c">void _start() {
+    uartinit();                  // запускаем последовательный порт
+
+    vga_clear_screen();          // очищаем экран
+    printk(&quot;\nYABLOKO\n&quot;);       // выводим текст
+    asm(&quot;hlt&quot;);                  // остановиться и ничего не делать
+}
+</code></pre>
+<p>Заметим несколько вещей в <code>kernel.c</code>:</p>
+<ol>
+<li>Функция <code>vga_clear_screen()</code> заполняет весь экран пробелами.</li>
+<li><code>printk(&quot;\nYABLOKO\n&quot;)</code> выводит текст не только на экран, но и на последовательный порт. На данный момент у нас не реализованы прокрутка экрана и курсор; мы не умеем работать с клавиатурой и вводом.</li>
+<li>У нас нет способа выключить компьютер; нам придется делать это платформо-специфичным путём с помощью <code>qemu_shutdown()</code> </li>
+</ol>
+<p>Существует две реализации языка C:</p>
+<ul>
+<li>Hosted реализация подразумевает, что есть операционная система, есть стандартная библиотека языка C и реализованные в ней функции. На эту реализацию мы рассчитываем при запуске компилятора gcc.</li>
+<li>Freestanding реализация используется для ядра, подразумевает, что мы работаем без операционной системы, сами организуем загрузку бинарника и начало исполнения в нужной точке. Особенность freestanding режима — отсутствие функции main(); пишем _start — это стандартное название для точки входа в ELF-бинарник. При сборке передаем опцию <code>-ffreestanding</code>, чтобы работать именно с этой реализацией.</li>
+</ul>
+<p>Так же важный момент сборки <code>-Ttext 0x1000</code> — мы указываем, с какого адреса начинается секция <code>text</code>. В адресуемой памяти x86 этот адрес как раз попадает в диапазон usable memory. </p>
+<h3 id="master-boot-record"><a class="header" href="#master-boot-record">MASTER BOOT RECORD</a></h3>
+<p>BIOS читает загрузчик в память по адресу 0x7c00 и на этот же адрес передает выполнение. Задача — скомпоновать mbr так, чтобы он с этого адреса начинался.</p>
+<p>Чтобы запустить под отладчиком целый компьютер, нужен следующий кусок в Makefile</p>
+<pre><code class="language-makefile">debug-boot-nox: image.bin mbr.elf
+	qemu-system-i386 -nographic -drive format=raw,file=$&lt; **-s -S** &amp;  // &quot;взаимодействуй с отладчиком и подожди, пока отладчик подключится&quot;
+	$(GDB) mbr.elf \
+		-ex &quot;set architecture i8086&quot; \                               // архитектура 8086 (16-битная архитектура)
+		-ex &quot;target remote localhost:1234&quot; \                         // эмулятор по адресу localhost:1234 запустит gdb сервер и будет ждать, когда подключится отладчик 
+		-ex &quot;break *0x7c00&quot; \                                        // breakpoint на адрес входа в загрузчик
+		-ex &quot;continue&quot;                                               // продолжить исполнение
+</code></pre>
+<p>Посмотрим ближе на mbr.S под отладчиком:</p>
+<pre><code class="language-x86asm">.code16
+    .global _start
+_start:
+// по договоренностям в %dl BIOS передает загрузчику номер диска,
+// с которого он загрузчик прочитал; поэтому этот регистр сохраняется в boot_drive
+    mov %dl, boot_drive                     
+    mov $banner, %si
+    call print_string                         // посимвольная печать banner
+
+    call get_drive_geometry
+    call load_kernel
+    call switch_to_32bit
+
+    hlt
+    jmp . // loop forever
+</code></pre>
+<p>Для ввода-вывода в загрузчике используются функции BIOS. Пример можно увидеть в <code>print_string</code>: в регистр <code>%ah</code> кладётся магическое значение 0x0e, а в <code>%al</code> кладется символ; при вызове  <code>int $0x10</code> символ печатается на экран. Следующий код печатает посимвольно строку:</p>
+<pre><code class="language-x86asm">.code16
+print_string:
+    mov $0x0e, %ah  // &quot;teletype output&quot;
+repeat:
+    lodsb           // equivalent to mov (%si), %al; inc %si
+
+    test %al, %al
+    je done
+
+    int $0x10       // bios interrupt
+    jmp repeat
+done:
+    ret
+</code></pre>
+<p>В <code>fs/fs.h</code> описана структура файловой системы: первый сектор она использует для собственных нужд, со следующего сектора начинается первый файл. Пока что у нас один файл kernel.bin, он находится начиная с третьего сектора диска.</p>
+<pre><code>/* Directory structure:
+         32-byte entries
+┌───────────────────────────────┐
+│Reserved                       │
+│char[32]                       │
+├──────┬──────┬────────┬────────┤
+│Offset│Size  │Reserved│Name    │
+│uint32│uint32│uint32  │char[20]│
+├──────┼──────┼────────┼────────┤
+│ ...  │      │        │        │
+Offset is in sectors (zero-based),
+size is in bytes, name is 0-terminated.
+*/
+</code></pre>
+<p>Результирующий образ диска состоит из загрузочного сектора и файловой системы.</p>
+<p>Так как нет встроенного драйвера жесткого диска, мы читаем с диска секторы с ядром с помощью BIOS, как и загрузчик. Реализация находится в функции <code>load_kernel</code> в <code>mbr.S</code>. Результат работы этой функции:</p>
+<ul>
+<li>В памяти оказывается ядро (то, что идёт после заголовка в ELF-файле)</li>
+<li>В переменной entry оказывается адрес точки входа, на которую мы позже будем передавать управление.</li>
+</ul>
+<p>Чтобы загрузить ELF-файл нам надо прочитать программные заголовки и для каждого из них загрузить секцию по соответствующему адресу. Но у нас это реализовано по-другому: мы рассчитываем, что ELF-файл можно загрузить в память одним куском без разграничения доступа, защиты памяти. Мы также находимся в 16-битном режиме и используем функции BIOS (см. <code>int 0x13</code>)</p>
+<p>После <code>load_kernel</code> мы переходим в 32-битный режим, так как ядро мы собирали как 32-битный бинарник. Поскольку IBM PC умел адресовать только 1Мб памяти, у него было 20 дорожек на адресной шине ($2^{20}$ байт = 1 Мбайт): A0-A19. С появлением компьютеров, способных адресовать большее количество памяти, возникла проблема совместимости:  старый софт рассчитывал, что в адресе больше 1Мб старшие биты адреса обрезаются. Для того чтобы вывести компьютер из этого режима совместимости, нужно провести некоторые манипуляции (первые две строки функции):</p>
+<pre><code class="language-x86asm">switch_to_32bit:
+    mov	$2, %al
+    out	%al, $0x92          // enable A20
+
+    cli                     // 1. disable interrupts
+
+// в процессоре есть специальный регистр, указывающий на gdt, и мы загружаем таблицу в него:
+    lgdt gdt_descriptor     // 2. load GDT descriptor
+
+// меняем младший бит в регистре %cr0; так мы переходим из real mode в protected
+    mov %cr0, %eax
+    or $1, %eax             // 3. enable protected mode
+    mov %eax, %cr0
+
+// мы не можем загрузить %cs напрямую с помощью mov, поэтому пользуемся long jump - он загружает %cs и %eip
+    ljmp $SEG_KCODE &lt;&lt; 3, $init_32bit // 4. far jump
+</code></pre>
+<p>Сегментные регистры cs, ds, cs, ds, ss, es, fs, gs теперь означают не смещение в памяти, а индекс в таблице дескрипторов (Global Descriptor Table) — структуре данных, где указаны сегменты и их особенности (например, код ядра должен исполняться только на высоком уровне привилегий; старый 16-битный код должен исполняться в режиме совместимости). Таблицу дескрипторов можно увидеть ниже:</p>
+<pre><code class="language-x86asm">gdt_start:
+    .quad 0x0                                // null descriptor, необходимость
+    SEG_ASM(STA_X|STA_R, 0x0, 0xffffffff)    // code seg, доступный на чтение и исполнение, адрес от 0x0 до 0xffffffff
+    SEG_ASM(STA_W, 0x0, 0xffffffff)          // data seg, доступный на запись (и автоматически на чтение)
+gdt_end:
+</code></pre>
+<p>То, как раскрываются макросы, можно посмотреть в <code>cpu/gdt.h</code></p>
+<p>Переключившись в 32-битный режим, мы должны создать стек и переключиться на исполнение кода из <code>kernel.c</code>:</p>
+<pre><code class="language-x86asm">mov $KERN_STACK_BASE, %ebp   // создание стека
+    mov %ebp, %esp
+
+    movzwl entry, %esi       // сохраненный адрес точки входа
+    call *%esi               // переключение на исполнение кода ядра
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../ipr/git.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../interrupts/Interrupts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../ipr/git.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../interrupts/Interrupts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/13-io/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:50 GMT -->
+</html>

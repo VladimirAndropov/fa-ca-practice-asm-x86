@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    
+<!-- Mirrored from caos2023.myltsev.ru/lectures/15-rings/rings.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:53 GMT -->
+<head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Кольца защиты - HSE CAOS 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="../../../cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJaxdda6.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../index.html";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../01-course.html">Как устроен курс</a></li><li class="chapter-item expanded "><a href="../02-computers.html"><strong aria-hidden="true">1.</strong> Компьютеры</a></li><li class="chapter-item expanded "><a href="../03-integers.html"><strong aria-hidden="true">2.</strong> Целые числа</a></li><li class="chapter-item expanded "><a href="../04-assembly.html"><strong aria-hidden="true">3.</strong> Язык ассемблера</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-jumps.html"><strong aria-hidden="true">3.1.</strong> Переходы</a></li><li class="chapter-item expanded "><a href="../06-nand2cpu.html"><strong aria-hidden="true">3.2.</strong> Как сделать CPU из транзисторов</a></li><li class="chapter-item expanded "><a href="../07-memory.html"><strong aria-hidden="true">3.3.</strong> Обращение к памяти</a></li><li class="chapter-item expanded "><a href="../08-call-ret/08-call-ret.html"><strong aria-hidden="true">3.4.</strong> Подпрограммы</a></li><li class="chapter-item expanded "><a href="../09-elf/index.html"><strong aria-hidden="true">3.5.</strong> Компоновка</a></li><li class="chapter-item expanded "><a href="../x1-cpu-internals/index.html"><strong aria-hidden="true">3.6.</strong> Внутренности современных процессоров</a></li></ol></li><li class="chapter-item expanded "><a href="../10-c/index.html"><strong aria-hidden="true">4.</strong> Язык Си</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../11-c-continued/index.html"><strong aria-hidden="true">4.1.</strong> Динамическая память</a></li><li class="chapter-item expanded "><a href="../12-c-bit-twiddling/index.html"><strong aria-hidden="true">4.2.</strong> Bits and pieces</a></li></ol></li><li class="chapter-item expanded "><a href="../ipr/git.html"><strong aria-hidden="true">5.</strong> Git</a></li><li class="chapter-item expanded "><a href="../13-io/index.html"><strong aria-hidden="true">6.</strong> «Системное программирование»</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../interrupts/Interrupts.html"><strong aria-hidden="true">6.1.</strong> Прерывания</a></li><li class="chapter-item expanded "><a href="rings.html" class="active"><strong aria-hidden="true">6.2.</strong> Кольца защиты</a></li></ol></li><li class="chapter-item expanded "><a href="../16-files/index.html"><strong aria-hidden="true">7.</strong> Файлы</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../17-file-system/index.html"><strong aria-hidden="true">7.1.</strong> Файловая система</a></li></ol></li><li class="chapter-item expanded "><a href="../18-floating-point-arithmetic/index.html"><strong aria-hidden="true">8.</strong> Вещественные числа</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../18-x86-floating-point/index.html"><strong aria-hidden="true">8.1.</strong> Поддержка на x86: FPU, MMX, SSE, AVX</a></li></ol></li><li class="chapter-item expanded "><a href="../22-sockets/index.html"><strong aria-hidden="true">9.</strong> Сети и сокеты</a></li><li class="chapter-item expanded "><a href="../19-process/index.html"><strong aria-hidden="true">10.</strong> Процессы</a></li><li class="chapter-item expanded "><a href="../25-shared-mem/index.html"><strong aria-hidden="true">11.</strong> Работа с общей памятью</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../26-parallel-2/index.html"><strong aria-hidden="true">11.1.</strong> RMW</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">HSE CAOS 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Кольца-защиты"><a class="header" href="#Кольца-защиты">Кольца защиты</a></h1>
+<p>Каждая программа запускается с некоторым уровнем привелегий (информация о котором хранится в младших 2 битах регистра cs процессора), который может быть повышен и исключительных ситуациях. Программы, являющиеся частью операционной системы запускаются с уровнем привилегий 0 (наивысшим), пользовательские программы (userspace), запускаются с уровнем привилегий 3.  Уровни привилегий 1 и 2 могут использоваться для исполнения драйверов внешних устройств (однако в современных ОС используются только кольца 0 и 3).</p>
+<p><strong>Привилегии колец:</strong></p>
+<p><strong>Ring 0:</strong></p>
+<ul>
+<li>Доступ к железу (port mapped IO, memory mapped IO)</li>
+<li>Служебные регистры (<a href="https://wiki.osdev.org/CPU_Registers_x86#GDTR">GDTR, IDTR</a>, <a href="https://wiki.osdev.org/CPU_Registers_x86#Control_Registers">контрольные регистры</a>)</li>
+<li>Служебные инструкции (lgdt, lidt, cli/sti, …)</li>
+</ul>
+<p><strong>Ring 3:</strong></p>
+<ul>
+<li>
+<p>Доступ к инструкциям/регистрам общего назначения (полностью самостоятельно можно только пользоваться доступной памятью и что-то считать, за всем остальным придется звать ядро)</p>
+<p>При исполнении кода из какого-либо сегмента, процессор смотрит в таблицу дескрипторов сегментов, и подгружает в cs номер дескриптора. Верхние 13 бит нового значения отвечают соответственно за этот самый номер в (GDT). В cs есть ещё 3 значащих бита(регистр 16-битный) - один бит локальности, по нему регистр понимает где смотреть дескрипторы, в локальной таблице дескрипторов (LDT), или в глобальной(GDT), и младшие 2 бита - TPL(Target privilege level). После загрузки номера дескриптора проверяется соответствие привилегий текущих и требуемых (CPL и TPR - current / target PL), и дескриптор загружается в кэш процессора.</p>
+</li>
+</ul>
+<p><strong>Сегментация</strong></p>
+<p>При запуске Яблока создаются 4 базовых сегмента:</p>
+<pre><code class="language-c">#define USER 3
+#define KERNEL 0
+#define UBASE 0xffff0000
+
+// SEG(EFLAGS, base, offset, privilege level) - запись сегмента в GDT
+
+void init_seg_desc(void) {
+	seg_desc[SEG_KCODE] = SEG(STA_X|STA_R, 0, 0xffffffff, KERNEL) 
+	seg_desc[SEG_KDATA] = SEG(STA_W,       0, 0xffffffff, KERNEL)
+	seg_desc[SEG_UCODE] = SEG(STA_X|STA_R, UBASE, 0xffffffff - UBASE, USER)
+	seg_desc[SEG_UDATA] = SEG(STA_W,       UBASE, 0xffffffff - UBASE, USER)
+
+}
+
+// соответственно, физический адрес памяти вычисляется следующим образом:
+//  base + SEG_OFFSET
+</code></pre>
+<h3 id="Обработка-прерываний"><a class="header" href="#Обработка-прерываний">Обработка прерываний</a></h3>
+<pre><code>При возникновении прерывания (аппаратного или программного), процессору надо повысить свой уровень привилегий, обработать прерывание, а после понизить его обратно. 
+</code></pre>
+<p>Псевдокод обработки прерывания:</p>
+<pre><code class="language-c">vector X; ←- наш вектор прерываний
+gate = idt[X]; &lt;-- берём gate из таблицы прерываний по этому вектору
+selector = gate.selector;
+dpl = selector.pl; &lt;-- уровень привилегий на котором должен быть обработан X
+
+if cpl &gt; dpl { // cpl - current privilege level
+	switch_stack();
+	change_privilege_level();
+}
+
+// обработка прерывания
+</code></pre>
+<p><strong>Псевдо-реализация переключения стеков процессов:</strong> </p>
+<ul>
+<li>Сохраняем состояние программы (регистры) в стек</li>
+<li>Кладем в %esp верх другого стека</li>
+<li>С нового стека снимаем состояние программы (регистры) и продолжаем исполняться</li>
+</ul>
+<h3 id="Обработка-прерываний-в-Яблоке"><a class="header" href="#Обработка-прерываний-в-Яблоке">Обработка прерываний в Яблоке:</a></h3>
+<pre><code class="language-c">void trap(registers_t *r) {
+	if(r-&gt;int_no == T_SYSCALL) { // отдельная проверка на системный вызов - частый частный случай прерывания
+		switch(r-&gt;eax) {
+		
+		case SYS_exit:
+			if(r-&gt;ebx) {
+				kprinf(&quot;Success\n&quot;);
+			} else { 
+				kprintf(&quot;Program finished with exit code %d\n&quot;, r-&gt;ebx);
+			}
+			killproc(); // переключение стека без сохранения текущего состояния
+
+		case SYS_greet:
+			kprintf(&quot;Hello world!\n&quot;);
+			r-&gt;eax = 0;
+			break;
+		
+		default:
+			kprinf(&quot;Unknown syscall);
+			r-&gt;eax = -1;
+			break;
+		}
+	}
+}
+</code></pre>
+<h3 id="Системный-вызов"><a class="header" href="#Системный-вызов">Системный вызов</a></h3>
+<p>инструкция int $0x84(Yabloko-specific, int $0x80 для Linux/i368) - обычное прерывание</p>
+<p>%eax ← function</p>
+<p>%ebx ← arg1</p>
+<p>%ecx ← arg2</p>
+<p>%edx ←arg3</p>
+<pre><code>Например, инструкция int $0x80 (системное прерывание 128), может вывести на экран строку, для этого в %eax должен быть номер функции (4 в данном случае), в	
+%ebx - файловый дескриптор (лучше перед вызовом проверить его валидность), в %ecx - адрес массива (не обязательно типа char), в %edx - sizeof() выводимого буффера.
+</code></pre>
+<pre><code class="language-c">// пример как может быть реализован тот же системный вызов write(...)
+void print_string(int fd, char* str, int32_t length) {
+	asm volatile(
+		&quot;mov $4, %eax \n&quot;
+		&quot;int $0x80 \n&quot;
+		:
+		: &quot;b&quot;(fd), &quot;c&quot;(str), &quot;d&quot;(length)
+		: &quot;eax&quot; // indeed nessesary clobber
+		);
+}
+</code></pre>
+<h3 id="Виртуальная-память"><a class="header" href="#Виртуальная-память">Виртуальная память</a></h3>
+<p>Страничная виртуальная память - отображение каждого “блока” памяти определенного размера на физическую память внутри процессора</p>
+<p><img src="screenshot.png" alt="Screenshot 2023-02-05 193419.png" /></p>
+<ul>
+<li>У каждого процесса свое отображение</li>
+<li>Стандартный размер страницы - 4KiB</li>
+<li>Первые 10 бит адреса - индекс page directory</li>
+<li>Вторые 10 бит - индекс в page table</li>
+<li>Оставшиеся 12 бит - смещение внутри страницы памяти</li>
+<li>Процессор может положить отображение в свой кэш(TLB - translation lookaside buffer) →  отображение 20-битного префикса адреса на физический адрес памяти. Сбрасывается после переключения процесса</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../interrupts/Interrupts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../16-files/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../interrupts/Interrupts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../16-files/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+
+<!-- Mirrored from caos2023.myltsev.ru/lectures/15-rings/rings.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 15 Jan 2024 11:59:53 GMT -->
+</html>
