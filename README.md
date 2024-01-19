@@ -11,7 +11,7 @@
 4. [[конспект](04sem-asm/README.md)][[лекция](04lec-asm/README.md)] - стек. Работа с asm из C/C++ и наборот. printf/scanf. Cdecl
 
 -------
-[переходим к изучению RISC-V](https://github.com/VladimirAndropov/fa-ca-practice-riscv-verilog)
+[* создание простой операционной системы](https://github.com/VladimirAndropov/fa-os-practice-yabloko)
 
 _______
 далее пункты для магистров
