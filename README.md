@@ -11,12 +11,12 @@
 4. [[конспект](04sem-asm/README.md)][[лекция](04lec-asm/README.md)] - стек. Работа с asm из C/C++ и наборот. printf/scanf. Cdecl
 
 -------
-[* создание простой операционной системы](https://github.com/VladimirAndropov/fa-os-practice-yabloko)
+5. [создание простой операционной системы x86](https://github.com/VladimirAndropov/fa-os-practice-yabloko)
 
 _______
-далее пункты для магистров
 
-5. [конспект][c] - буферизация, выравнивание
+
+6. [конспект][c] - буферизация, выравнивание
 6. [конспект][c] - системные вызовы
 7. [[конспект](07sem-c/README.md)][c] - динамическая память.
 8. [[конспект](08sem-c/README.md)][c] - IEEE754. float. inline asm.
